@@ -26,7 +26,7 @@ class OnBoardingScreenActivity : AppCompatActivity() {
                 "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint."
             ),
             OnBoardingEntity(
-                R.drawable.ic_onboarding1,
+                R.drawable.ic_onboarding3,
                 "Crowdfunding",
                 "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint."
             )
@@ -52,11 +52,9 @@ class OnBoardingScreenActivity : AppCompatActivity() {
                 override fun onPageSelected(position: Int) {
                     super.onPageSelected(position)
                     if (position == onBoardingViewPagerAdapter.itemCount - 1) {
-                        binding.tvSkip.visibility = View.GONE
                         binding.imgIndicatorOnboarding.visibility = View.GONE
                         binding.btnGetStarted.visibility = View.VISIBLE
                     } else {
-                        binding.tvSkip.visibility = View.VISIBLE
                         binding.imgIndicatorOnboarding.visibility = View.VISIBLE
                         binding.btnGetStarted.visibility = View.GONE
                     }

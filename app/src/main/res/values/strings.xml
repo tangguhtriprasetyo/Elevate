@@ -3,4 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_history">History</string>
     <string name="title_profile">Profile</string>
+    <string name="placeholder_caption">Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint.</string>
+    <string name="title_ideator">IDEATOR</string>
+    <string name="title_funder">FUNDER</string>
+    <string name="title_crowdfunding">CROWDFUNDING</string>
 </resources>

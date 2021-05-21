@@ -9,6 +9,7 @@ import com.bangkit.elevate.R
 import com.bangkit.elevate.data.OnBoardingEntity
 import com.bangkit.elevate.databinding.ActivityOnBoardingScreenBinding
 import com.bangkit.elevate.ui.dashboard.MainActivity
+import com.bangkit.elevate.ui.login.LoginActivity
 
 class OnBoardingScreenActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnBoardingScreenBinding
@@ -42,7 +43,7 @@ class OnBoardingScreenActivity : AppCompatActivity() {
         binding.imgIndicatorOnboarding.setViewPager(binding.viewPagerOnboarding)
 
         binding.btnGetStarted.setOnClickListener {
-            val intent = Intent(this@OnBoardingScreenActivity, MainActivity::class.java)
+            val intent = Intent(this@OnBoardingScreenActivity, LoginActivity::class.java)
             startActivity(intent)
             finish()
         }

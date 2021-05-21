@@ -11,4 +11,5 @@
     <color name="Cyan_A_400_Dark">#29B6F6</color>
     <color name="Light_blue_300">#29B6F6</color>
     <color name="Light_blue_300_dark">#0086C3</color>
+    <color name="OnSecondary">#1B3151</color>
 </resources>

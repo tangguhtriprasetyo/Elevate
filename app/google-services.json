@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "766502268255",
+    "project_id": "onyx-zodiac-314611",
+    "storage_bucket": "onyx-zodiac-314611.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:766502268255:android:1cf69abba640c5aab3daea",
+        "android_client_info": {
+          "package_name": "com.bangkit.elevate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "766502268255-hmuuknm3r6u7d10482fr7tflg5qs1frj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bangkit.elevate",
+            "certificate_hash": "3f41ccecd1b3368157368bf30ca4dd10671f18b6"
+          }
+        },
+        {
+          "client_id": "766502268255-8pgmfk1s5j937c76ramamg8sis06rgoa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8kAwQlAP9avjgla6dq9MUKC_JuxenaLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "766502268255-8pgmfk1s5j937c76ramamg8sis06rgoa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

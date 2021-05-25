@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.dashboard.ideator.AddIdeaFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/title_form_create_idea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/kanit_bold"
+            android:text="Create Your Idea"
+            android:textColor="@color/OnSecondary"
+            android:textSize="34sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/title_brand_name"
+            style="@style/TvFormTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Brand Name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_form_create_idea" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlined_et_brand_name"
+            style="@style/OutlinedEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Brand Name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_brand_name">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_brand_name"
+                style="@style/OutlinedInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/title_business_idea"
+            style="@style/TvFormTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Business Idea"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/outlined_et_brand_name" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlined_et_business_idea"
+            style="@style/OutlinedEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Business Idea"
+            app:helperText="Example: Buka Warung Ayam Geprek"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_business_idea">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_business_idea"
+                style="@style/OutlinedInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/title_description"
+            style="@style/TvFormTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/outlined_et_business_idea" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlined_et_description"
+            style="@style/OutlinedEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Description"
+            app:counterEnabled="true"
+            app:counterMaxLength="200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_description">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_Description"
+                style="@style/OutlinedInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:inputType="textMultiLine"
+                android:maxLines="8"
+                android:minLines="4" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/title_cost"
+            style="@style/TvFormTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Required Cost"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/outlined_et_description" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/outlined_et_cost"
+            style="@style/OutlinedEditTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Required Cost"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_cost">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_cost"
+                style="@style/OutlinedInputEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/title_proposal"
+            style="@style/TvFormTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Proposal File"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/outlined_et_cost" />
+
+        <ImageView
+            android:id="@+id/border_line_proposal"
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:layerType="software"
+            android:src="@drawable/ic_dot_border_line"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_proposal" />
+
+        <TextView
+            android:id="@+id/title_browse_proposal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kanit"
+            android:text="Click to browse your files"
+            app:layout_constraintBottom_toBottomOf="@+id/border_line_proposal"
+            app:layout_constraintEnd_toEndOf="@+id/border_line_proposal"
+            app:layout_constraintStart_toStartOf="@+id/border_line_proposal"
+            app:layout_constraintTop_toTopOf="@+id/border_line_proposal" />
+
+        <TextView
+            android:id="@+id/title_brand_photo"
+            style="@style/TvFormTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Business Idea"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/border_line_proposal" />
+
+        <ImageView
+            android:id="@+id/border_line_brand_photo"
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:layerType="software"
+            android:src="@drawable/ic_dot_border_line"
+            app:layout_constraintBottom_toTopOf="@+id/btn_submit_idea"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_brand_photo" />
+
+        <TextView
+            android:id="@+id/title_browse_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/kanit"
+            android:text="Click to browse your files"
+            app:layout_constraintBottom_toBottomOf="@+id/border_line_brand_photo"
+            app:layout_constraintEnd_toEndOf="@+id/border_line_brand_photo"
+            app:layout_constraintStart_toStartOf="@+id/border_line_brand_photo"
+            app:layout_constraintTop_toTopOf="@+id/border_line_brand_photo" />
+
+        <Button
+            android:id="@+id/btn_submit_idea"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="32dp"
+            android:fontFamily="@font/kanit_bold"
+            android:text="SUBMIT"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

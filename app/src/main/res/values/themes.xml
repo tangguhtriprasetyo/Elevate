@@ -18,4 +18,29 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="OutlinedEditTextLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:textColorHint">@color/OnSecondary</item>
+        <item name="hintTextColor">@color/OnSecondary</item>
+        <item name="android:layout_marginStart">32dp</item>
+        <item name="android:layout_marginEnd">32dp</item>
+        <item name="android:fontFamily">@font/kanit</item>
+        <item name="boxStrokeColor">@color/OnSecondary</item>
+        <item name="borderWidth">16dp</item>
+    </style>
+
+    <style name="OutlinedInputEditText" parent="ThemeOverlay.MaterialComponents.TextInputEditText.OutlinedBox.Dense">
+        <item name="android:textColor">@color/OnSecondary</item>
+        <item name="android:fontFamily">@font/kanit</item>
+    </style>
+
+    <style name="TvFormTitle">
+        <item name="android:textColor">@color/OnSecondary</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:layout_marginStart">32dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginEnd">32dp</item>
+        <item name="android:fontFamily">@font/kanit_bold</item>
+    </style>
+
 </resources>

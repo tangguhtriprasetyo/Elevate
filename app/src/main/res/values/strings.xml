@@ -40,4 +40,5 @@
     <string name="bank_account">Bank Account</string>
     <string name="total_amount">Total Amount</string>
     <string name="bank_sample">123456789101</string>
+    <string name="default_web_client_id">766502268255-8pgmfk1s5j937c76ramamg8sis06rgoa.apps.googleusercontent.com</string>
 </resources>

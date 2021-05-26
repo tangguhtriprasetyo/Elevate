@@ -10,4 +10,34 @@
     <string name="welcome">Welcome to Evelate!</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="modal">Modal</string>
+    <string name="quantity">Rp.50.000.000</string>
+    <string name="location">Location</string>
+    <string name="brand_name">Brand Name</string>
+    <string name="status">Status Ide</string>
+    <string name="brand_type">Brand Type</string>
+    <string name="username">Username</string>
+    <string name="role">Role</string>
+    <string name="Ideator">Ideator</string>
+    <string name="profile">Profile</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="name">Name</string>
+    <string name="email">Email</string>
+    <string name="address">Address</string>
+    <string name="phone">Phone</string>
+    <string name="banner">Banner</string>
+    <string name="balance">Balance</string>
+    <string name="rp_660_000">Rp. 660.000</string>
+    <string name="current_balance">Current Balance</string>
+    <string name="top_up">Top Up</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="bank_id">27456123151815 a/n</string>
+    <string name="bank_name">PT. Elevate Makmur Jaya</string>
+    <string name="note">NOTE</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Convallis dignissim quis at vitae viverra ut. Platea turpis laoreet ut dictum. Nullam sit nulla enim a adipiscing turpis odio. Eget turpis dictum sed gravida magna ac fermentum libero quam.</string>
+    <string name="proof_of_payment">Proof of Payment</string>
+    <string name="confirm">Confirm</string>
+    <string name="bank_account">Bank Account</string>
+    <string name="total_amount">Total Amount</string>
+    <string name="bank_sample">123456789101</string>
 </resources>

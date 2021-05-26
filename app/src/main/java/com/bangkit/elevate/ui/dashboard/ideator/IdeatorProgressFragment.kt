@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bangkit.elevate.R
 import com.bangkit.elevate.databinding.FragmentIdeatorProgressBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class IdeatorProgressFragment : Fragment() {
@@ -28,6 +29,8 @@ class IdeatorProgressFragment : Fragment() {
 
 
         binding.layoutEmptyIdea.btnAddIdea.setOnClickListener {
+
+            val bottomNav: BottomNavigationView = requireActivity().findViewById(R.id.bottom_nav)
             requireActivity().supportFragmentManager.beginTransaction().apply {
                 replace(
                     R.id.host_fragment_activity_main,
@@ -37,6 +40,7 @@ class IdeatorProgressFragment : Fragment() {
                 addToBackStack(null)
                 commit()
             }
+            bottomNav.visibility = View.GONE
         }
     }
 }

@@ -3,6 +3,7 @@ package com.bangkit.elevate.ui.dashboard
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -11,10 +12,15 @@ import com.bangkit.elevate.R
 import com.bangkit.elevate.databinding.ActivityMainBinding
 import com.bangkit.elevate.ui.dashboard.funder.FunderProgressFragment
 import com.bangkit.elevate.ui.dashboard.home.HomeFragment
+import com.bangkit.elevate.ui.dashboard.ideator.AddIdeaFragment
 import com.bangkit.elevate.ui.dashboard.ideator.IdeatorProgressFragment
 import com.bangkit.elevate.ui.dashboard.profile.ProfileFragment
 
 class MainActivity : AppCompatActivity() {
+
+    companion object {
+        const val ADD_IDEA_FRAGMENT = "add_idea_fragment"
+    }
 
     private lateinit var binding: ActivityMainBinding
     private var doubleBackToExit = false
@@ -47,7 +53,13 @@ class MainActivity : AppCompatActivity() {
         if (doubleBackToExit) {
             super.onBackPressed()
             return
+        } else if (supportFragmentManager.findFragmentByTag(AddIdeaFragment::class.java.simpleName) != null) {
+            super.onBackPressed()
+            binding.bottomNav.visibility = View.VISIBLE
+            return
+
         }
+
         this.doubleBackToExit = true
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
 
@@ -58,5 +70,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.commit {
             replace(R.id.host_fragment_activity_main, fragment)
         }
+        binding.bottomNav.visibility = View.VISIBLE
     }
+
 }

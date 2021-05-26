@@ -21,7 +21,6 @@
         android:id="@+id/host_fragment_activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingBottom="?attr/actionBarSize"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

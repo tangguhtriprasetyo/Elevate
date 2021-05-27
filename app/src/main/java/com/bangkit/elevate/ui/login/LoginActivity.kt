@@ -37,7 +37,6 @@ class LoginActivity : AppCompatActivity() {
         val resultLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK) {
-                    showLoading(true)
                     val data: Intent? = result.data
                     val task = GoogleSignIn.getSignedInAccountFromIntent(data)
                     try {
@@ -69,6 +68,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
         binding.btnGoogleSignin.setOnClickListener {
+            showLoading(true)
             val signInIntent = googleSignInClient.signInIntent
             resultLauncher.launch(signInIntent)
         }

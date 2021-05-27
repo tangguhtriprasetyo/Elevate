@@ -39,4 +39,21 @@
     <string name="confirm">Confirm</string>
     <string name="bank_account">Bank Account</string>
     <string name="total_amount">Total Amount</string>
+    <string name="progress_update">Progress Update</string>
+    <string name="donate">Donate</string>
+    <string name="xx_days_left">xx days left</string>
+    <string name="unfulfilled">UNFULFILLED</string>
+    <string name="proposal_file">Proposal File</string>
+    <string name="half_quantity">Rp.25.000.000</string>
+    <string name="detailCurrentProgress">50%</string>
+    <string name="collected">Collected</string>
+    <string name="description">Description</string>
+    <string name="term_2">Term 2</string>
+    <string name="locked_command">This phase is still locked. To unlock, the ideator must completed first term.</string>
+    <string name="term_3">Term 3</string>
+    <string name="term_1">Term 1</string>
+    <string name="document">Document</string>
+    <string name="term1_description">The ideator must provide the budget plan for the initial stages. When the budget plan approved, 25% of the total donations will be given to start the project.</string>
+    <string name="document_in_review">Document in Review</string>
+    <string name="term1_progress">To completed this phase, Please provide a budget plan document for the initial stages of your funding in pdf form.</string>
 </resources>

@@ -13,7 +13,6 @@ import com.bangkit.elevate.data.preference.UserPreference
 import com.bangkit.elevate.databinding.ActivityMainBinding
 import com.bangkit.elevate.ui.dashboard.funder.FunderProgressFragment
 import com.bangkit.elevate.ui.dashboard.home.HomeFragment
-import com.bangkit.elevate.ui.dashboard.ideator.AddIdeaFragment
 import com.bangkit.elevate.ui.dashboard.ideator.IdeatorProgressFragment
 import com.bangkit.elevate.ui.dashboard.profile.ProfileFragment
 
@@ -21,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         const val ADD_IDEA_FRAGMENT = "add_idea_fragment"
+        const val CHILD_FRAGMENT = "child_fragment"
     }
 
     private lateinit var binding: ActivityMainBinding
@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         if (doubleBackToExit) {
             super.onBackPressed()
             return
-        } else if (supportFragmentManager.findFragmentByTag(AddIdeaFragment::class.java.simpleName) != null) {
+        } else if (supportFragmentManager.findFragmentByTag(CHILD_FRAGMENT) != null) {
             super.onBackPressed()
             binding.bottomNav.visibility = View.VISIBLE
             return

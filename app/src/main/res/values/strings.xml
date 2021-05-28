@@ -55,5 +55,6 @@
     <string name="term1_description">The ideator must provide the budget plan for the initial stages. When the budget plan approved, 25% of the total donations will be given to start the project.</string>
     <string name="document_in_review">Document in Review</string>
     <string name="term1_progress">To completed this phase, Please provide a budget plan document for the initial stages of your funding in pdf form.</string>
-    <string name="proposal_file">Proposal \nFile</string>
+    <string name="proposal_file">Proposal File</string>
+    <string name="pdf_name">Pdf Name</string>
 </resources>

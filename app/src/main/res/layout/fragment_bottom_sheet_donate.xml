@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/parent_layout_padding">
+
+    <TextView
+        android:id="@+id/textView19"
+        style="@style/SectionTitleStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Rp "
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="@+id/et_donate_dialog"
+        app:layout_constraintEnd_toStartOf="@+id/et_donate_dialog"
+        app:layout_constraintTop_toTopOf="@+id/et_donate_dialog"
+        app:layout_constraintVertical_bias="0.368" />
+
+    <EditText
+        android:id="@+id/et_donate_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/kanit"
+        android:hint="10000"
+        android:inputType="numberDecimal"
+        android:textColor="@color/OnSecondary"
+        android:textColorLink="@color/OnSecondary"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_donate_dialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/kanit_semibold"
+        android:text="Donate"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/et_donate_dialog"
+        tools:layout_editor_absoluteX="32dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

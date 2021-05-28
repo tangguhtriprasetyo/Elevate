@@ -15,6 +15,9 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardDetail"
             style="@style/CardStyle"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             app:cardCornerRadius="10dp"
             app:layout_constraintBottom_toTopOf="@+id/textView8"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,9 +78,10 @@
                 <TextView
                     android:id="@+id/tv_brand_name"
                     style="@style/TitleDetailBrand"
-                    android:layout_width="164dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/brand_name"
                     app:layout_constraintStart_toEndOf="@+id/card_img_brand"
                     app:layout_constraintTop_toTopOf="parent"
@@ -101,7 +105,7 @@
                 <TextView
                     android:id="@+id/detailDuration"
                     style="@style/SubtitleDetailBrand"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="4dp"
                     android:text="@string/xx_days_left"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/ic_time"
@@ -285,6 +289,20 @@
                     app:layout_constraintTop_toTopOf="@+id/btn_add_term1"
                     tools:ignore="SmallSp" />
 
+                <TextView
+                    android:id="@+id/title_pdf_term1"
+                    style="@style/Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxWidth="52dp"
+                    android:maxLines="1"
+                    android:text="@string/pdf_name"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_add_term1"
+                    tools:ignore="SmallSp" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
@@ -306,7 +324,7 @@
                 layout="@layout/layout_progress_lock"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="visible" />
+                android:visibility="gone" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -319,7 +337,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/ic_bi_plus_square_dotted"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/title_term2"
                     app:layout_constraintStart_toStartOf="@+id/title_term2"
                     app:layout_constraintTop_toBottomOf="@+id/title_term2"
@@ -341,10 +359,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/term1_progress"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toBottomOf="@+id/btn_add_term2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/btn_add_term2"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:id="@+id/title_pdf_term2"
+                    style="@style/Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxWidth="52dp"
+                    android:maxLines="1"
+                    android:text="@string/pdf_name"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_add_term2"
                     tools:ignore="SmallSp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -368,7 +400,7 @@
                 layout="@layout/layout_progress_lock"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone" />
+                android:visibility="visible" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -381,7 +413,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:background="@drawable/ic_bi_plus_square_dotted"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/title_term3"
                     app:layout_constraintStart_toStartOf="@+id/title_term3"
                     app:layout_constraintTop_toBottomOf="@+id/title_term3"
@@ -403,10 +435,24 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/term1_progress"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@+id/btn_add_term3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/btn_add_term3"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:id="@+id/title_pdf_term3"
+                    style="@style/Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxWidth="52dp"
+                    android:maxLines="1"
+                    android:text="@string/pdf_name"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btn_add_term3"
                     tools:ignore="SmallSp" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -178,10 +178,37 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/kanit"
             android:text="Click to browse your files"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/border_line_proposal"
             app:layout_constraintEnd_toEndOf="@+id/border_line_proposal"
             app:layout_constraintStart_toStartOf="@+id/border_line_proposal"
             app:layout_constraintTop_toTopOf="@+id/border_line_proposal" />
+
+        <ImageView
+            android:id="@+id/ic_proposal_after_upload"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_mdi_file_download"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@+id/border_line_proposal"
+            app:layout_constraintStart_toStartOf="@+id/border_line_proposal"
+            app:layout_constraintTop_toTopOf="@+id/border_line_proposal" />
+
+        <TextView
+            android:id="@+id/title_after_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/kanit"
+            android:maxWidth="256dp"
+            android:text="@string/pdf_name"
+            android:textAlignment="center"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@+id/ic_proposal_after_upload"
+            app:layout_constraintStart_toStartOf="@+id/ic_proposal_after_upload"
+            app:layout_constraintTop_toBottomOf="@+id/ic_proposal_after_upload" />
 
         <TextView
             android:id="@+id/title_brand_photo"
@@ -210,6 +237,7 @@
             android:id="@+id/title_browse_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:fontFamily="@font/kanit"
             android:text="Click to browse your files"
             app:layout_constraintBottom_toBottomOf="@+id/border_line_brand_photo"
@@ -217,12 +245,38 @@
             app:layout_constraintStart_toStartOf="@+id/border_line_brand_photo"
             app:layout_constraintTop_toTopOf="@+id/border_line_brand_photo" />
 
+        <ImageView
+            android:id="@+id/photo_after_upload"
+            android:layout_width="64dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/ic_sample_photo"
+            app:layout_constraintEnd_toEndOf="@+id/border_line_brand_photo"
+            app:layout_constraintStart_toStartOf="@+id/border_line_brand_photo"
+            app:layout_constraintTop_toTopOf="@+id/border_line_brand_photo" />
+
+        <TextView
+            android:id="@+id/title_img_after_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:fontFamily="@font/kanit"
+            android:maxWidth="256dp"
+            android:maxLines="1"
+            android:text="@string/pdf_name"
+            android:textAlignment="center"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@+id/photo_after_upload"
+            app:layout_constraintStart_toStartOf="@+id/photo_after_upload"
+            app:layout_constraintTop_toBottomOf="@+id/photo_after_upload" />
+
         <TextView
             android:id="@+id/title_location"
             style="@style/TvFormTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Location"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/border_line_brand_photo" />

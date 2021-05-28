@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.bangkit.elevate.R
+import com.bangkit.elevate.data.preference.UserPreference
 import com.bangkit.elevate.databinding.ActivityMainBinding
 import com.bangkit.elevate.ui.dashboard.funder.FunderProgressFragment
 import com.bangkit.elevate.ui.dashboard.home.HomeFragment
@@ -23,13 +24,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private lateinit var binding: ActivityMainBinding
+    private lateinit var mUserPreference: UserPreference
     private var doubleBackToExit = false
+    private var isIdeator = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        mUserPreference = UserPreference(this)
 
         val homeFragment = HomeFragment()
         val funderProgressFragment = FunderProgressFragment()
@@ -41,7 +46,14 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNav.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_home -> setCurrentFragment(homeFragment)
-                R.id.navigation_history -> setCurrentFragment(ideatorProgressFragment)
+                R.id.navigation_progress -> {
+                    isIdeator = mUserPreference.getRole()
+                    if (isIdeator) {
+                        setCurrentFragment(ideatorProgressFragment)
+                    } else {
+                        setCurrentFragment(funderProgressFragment)
+                    }
+                }
                 R.id.navigation_profile -> setCurrentFragment(profileFragment)
             }
             true

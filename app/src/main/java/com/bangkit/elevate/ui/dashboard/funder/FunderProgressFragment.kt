@@ -28,7 +28,7 @@ class FunderProgressFragment : Fragment() {
         _binding = FragmentFunderProgressBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.layoutEmptyFunder.constraintEmptyFunder.visibility = View.GONE
+        binding.layoutEmptyFunder.constraintEmptyFunder.visibility = View.VISIBLE
         return root
     }
 

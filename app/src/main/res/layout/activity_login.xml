@@ -37,7 +37,7 @@
 
     <TextView
         android:id="@+id/login_desc"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/kanit_semibold"

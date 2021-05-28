@@ -6,7 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.bangkit.elevate.databinding.ActivitySplashScreenBinding
-import com.bangkit.elevate.ui.onboardingscreen.OnBoardingScreenActivity
+import com.bangkit.elevate.ui.dashboard.MainActivity
 
 class SplashScreenActivity : AppCompatActivity() {
     private val timeOut: Long = 2000
@@ -18,7 +18,7 @@ class SplashScreenActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            val intent = Intent(this@SplashScreenActivity, OnBoardingScreenActivity::class.java)
+            val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
             startActivity(intent)
             finish()
         }, timeOut)

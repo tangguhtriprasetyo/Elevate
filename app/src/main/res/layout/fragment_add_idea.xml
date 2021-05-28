@@ -41,6 +41,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Brand Name"
+            app:counterEnabled="true"
+            app:counterMaxLength="25"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title_brand_name">
@@ -186,7 +188,7 @@
             style="@style/TvFormTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Business Idea"
+            android:text="Image Brand"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/border_line_proposal" />

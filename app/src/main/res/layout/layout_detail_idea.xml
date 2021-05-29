@@ -1,171 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/constraint_detail_idea"
-    android:visibility="visible"
     android:padding="16dp"
     android:background="@color/grey">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/cardDetail"
-        android:background="@drawable/roundimagewhite"
-        android:layout_width="379dp"
-        android:layout_height="375dp"
-        android:layout_marginTop="27dp"
-        android:layout_marginBottom="2dp"
+        style="@style/CardStyle"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/textView8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ProgressBar
-            android:id="@+id/detailProgressBar"
-            android:layout_width="315dp"
-            android:layout_height="11dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="210dp"
-            android:progress="50"
-            android:indeterminateOnly="false"
-            android:progressDrawable="@drawable/roundimagewhite"
-            android:progressTint="@color/OnSecondary"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
 
-        <Button
+
+            <ProgressBar
+                android:id="@+id/detailProgressBar"
+                style="@style/ProgressBarStyle"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailCurrentFund" />
+
+            <Button
             android:id="@+id/DonateButton"
-            android:layout_width="90dp"
-            android:layout_height="wrap_content"
+            android:layout_width="112dp"
+            android:layout_height="40dp"
             android:layout_gravity="end"
-            android:layout_marginTop="110dp"
             android:layout_marginEnd="76dp"
             android:textSize="14sp"
             android:fontFamily="@font/kanit"
             android:textAllCaps="false"
-            android:text="@string/donate"/>
-        
-        <ImageView
-            android:id="@+id/detailImage"
-            android:layout_width="169dp"
-            android:layout_height="135dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="18dp"
-            android:src="@drawable/ic_sample_photo"
-            tools:ignore="ContentDescription" />
+            android:text="@string/donate"
+            app:layout_constraintStart_toStartOf="@+id/detailClockImage"
+            app:layout_constraintTop_toBottomOf="@+id/detailDuration" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/detailImage"
+                android:layout_width="169dp"
+                android:layout_height="169dp"
+                app:cardCornerRadius="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/img_brand"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/brand_name"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_sample_photo" />
+
+            </androidx.cardview.widget.CardView>
+
+            <ImageView
+                android:id="@+id/detailFileProposal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_mdi_file_download"
+                app:layout_constraintBottom_toBottomOf="@+id/detailStatusFund"
+                app:layout_constraintStart_toEndOf="@+id/detailStatusFund"
+                app:layout_constraintTop_toTopOf="@+id/detailStatusFund"
+                tools:ignore="ContentDescription" />
 
         <ImageView
-            android:id="@+id/detailFileProposal"
+            android:id="@+id/detailClockImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_mdi_file_download"
-            android:layout_marginTop="159dp"
-            android:layout_marginStart="104dp"
-            tools:ignore="ContentDescription" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/detailLocation"
+            app:layout_constraintTop_toBottomOf="@+id/detailLocation"
             android:src="@drawable/ic_baseline_access_time_24"
-            android:layout_marginTop="93dp"
-            android:layout_marginStart="212dp"
+            android:layout_marginTop="8dp"
             tools:ignore="ContentDescription" />
 
-        <TextView
-            android:id="@+id/detailName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:layout_marginStart="213dp"
-            android:text="@string/brand_name"
-            android:textColor="@color/OnSecondary"
-            android:textSize="24sp"
-            android:fontFamily="@font/kanit_bold"/>
+            <TextView
+                android:id="@+id/detailName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/kanit_bold"
+                android:text="@string/brand_name"
+                android:textColor="@color/OnSecondary"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/detailImage"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+            <TextView
             android:id="@+id/detailBrandType"
-            android:alpha=".2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="54dp"
-            android:layout_marginStart="213dp"
+            style="@style/SubtitleDetailBrand"
             android:text="@string/brand_type"
-            android:textColor="@color/greytext"
-            android:textSize="14sp"
-            android:fontFamily="@font/kanit_bold"/>
+            app:layout_constraintStart_toStartOf="@+id/detailName"
+            app:layout_constraintTop_toBottomOf="@+id/detailName" />
 
         <TextView
             android:id="@+id/detailLocation"
-            android:alpha=".2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="76dp"
-            android:layout_marginStart="213dp"
+            style="@style/SubtitleDetailBrand"
             android:text="@string/location"
-            android:textColor="@color/greytext"
-            android:textSize="10sp"
-            android:fontFamily="@font/kanit_bold"
-            tools:ignore="SmallSp" />
+            app:layout_constraintStart_toStartOf="@+id/detailBrandType"
+            app:layout_constraintTop_toBottomOf="@+id/detailBrandType" />
 
         <TextView
             android:id="@+id/detailDuration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginEnd="90dp"
-            android:layout_marginTop="93dp"
-            android:textSize="10sp"
+            style="@style/SubtitleDetailBrand"
             android:text="@string/xx_days_left"
-            android:textColor="@color/greytext"
-            android:alpha=".2"
-            android:fontFamily="@font/kanit_bold"
-            tools:ignore="SmallSp" />
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/detailClockImage"
+            app:layout_constraintStart_toEndOf="@+id/detailClockImage"
+            app:layout_constraintTop_toTopOf="@+id/detailClockImage"/>
 
-        <TextView
-            android:id="@+id/detailStatusFund"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/red"
-            android:text="@string/unfulfilled"
-            android:textColor="@color/white"
-            android:textSize="10sp"
-            android:padding="2dp"
-            android:fontFamily="@font/kanit"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="160dp"
-            tools:ignore="SmallSp" />
+            <TextView
+                android:id="@+id/detailStatusFund"
+                style="@style/StatusIdeStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@color/red"
+                android:text="@string/unfulfilled"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailImage" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/proposal_file"
-            android:textSize="10sp"
-            android:layout_marginTop="161dp"
-            android:layout_marginStart="130dp"
-            android:textColor="@color/greytext"
-            android:fontFamily="@font/kanit_bold"
-            tools:ignore="SmallSp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/kanit_bold"
+                android:lineHeight="12sp"
+                android:text="@string/proposal_file"
+                android:textColor="@color/greytext"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="@+id/detailFileProposal"
+                app:layout_constraintStart_toEndOf="@+id/detailFileProposal"
+                app:layout_constraintTop_toTopOf="@+id/detailFileProposal"
+                tools:targetApi="p" />
 
-        <TextView
-            android:id="@+id/detailCurrentFund"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/kanit"
-            android:textSize="10sp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="185dp"
-            android:textColor="@color/OnSecondary"
-            android:text="@string/half_quantity"
-            tools:ignore="SmallSp" />
+            <TextView
+                android:id="@+id/detailCurrentFund"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/kanit"
+                android:text="@string/half_quantity"
+                android:textColor="@color/OnSecondary"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailStatusFund" />
 
         <TextView
             android:id="@+id/detailTotalFund"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/kanit"
-            android:textSize="10sp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="32dp"
-            android:layout_marginTop="185dp"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="@+id/detailCurrentFund"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/detailCurrentFund"
             android:textColor="@color/OnSecondary"
             android:text="@string/quantity"
             tools:ignore="SmallSp" />
@@ -174,61 +182,58 @@
             android:id="@+id/detailCurrentProgress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/OnSecondary"
             android:alpha=".4"
-            android:fontFamily="@font/kanit"
-            android:textSize="10sp"
-            android:layout_marginTop="225dp"
-            android:layout_marginStart="32dp"
-            android:text="@string/detailCurrentProgress"
-            tools:ignore="SmallSp" />
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@+id/detailProgressBar"
+            app:layout_constraintTop_toBottomOf="@+id/detailProgressBar"
+            android:text="@string/detailCurrentProgress"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginTop="225dp"
-            android:layout_marginEnd="20dp"
             android:text="@string/collected"
-            android:textSize="10sp"
-            tools:ignore="SmallSp" />
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/detailProgressBar"
+            app:layout_constraintTop_toBottomOf="@+id/detailProgressBar" />
 
         <TextView
+            android:id="@+id/detailDescTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/kanit"
-            android:textSize="14sp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="245dp"
+            style="@style/SectionTitleStyle"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="@+id/detailCurrentProgress"
+            app:layout_constraintTop_toBottomOf="@+id/detailCurrentProgress"
             android:textColor="@color/OnSecondary"
             android:text="@string/description"/>
 
-        <TextView
-            android:id="@+id/detailDescription"
-            android:layout_width="315dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="270dp"
-            android:text="@string/lorem_ipsum"
-            android:textColor="@color/OnSecondary"
-            android:alpha=".6"
-            android:fontFamily="@font/kanit"
-            android:textSize="10sp"
-            tools:ignore="SmallSp" />
-
+            <TextView
+                android:id="@+id/detailDescription"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dp"
+                android:alpha=".6"
+                android:fontFamily="@font/kanit"
+                android:maxLines="10"
+                android:text="@string/lorem_ipsum"
+                android:textColor="@color/OnSecondary"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailDescTitle" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="17dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginEnd="228dp"
+        style="@style/SectionTitleStyle"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="4dp"
-        android:fontFamily="@font/kanit_bold"
         android:text="@string/progress_update"
-        android:textColor="@color/OnSecondary"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/cardTerm1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -237,192 +242,175 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardTerm1"
-        android:layout_width="347dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="4dp"
+        style="@style/CardStyle"
+        app:cardCornerRadius="10sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toTopOf="@+id/cardTerm2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8">
 
-        <ProgressBar
-            android:id="@+id/Term1ProgressBar"
-            android:layout_width="250dp"
-            android:layout_height="8dp"
-            android:layout_marginStart="82dp"
-            android:layout_marginTop="50dp"
-            android:progress="50"
-            android:indeterminateOnly="false"
-            android:progressDrawable="@drawable/roundimagewhite"
-            android:progressTint="@color/OnSecondary"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="35dp"
-            android:layout_marginTop="27dp"
-            android:src="@drawable/ic_mdi_file_download"
-            tools:ignore="ContentDescription" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="28dp"
-            android:textSize="10sp"
-            android:fontFamily="@font/kanit"
-            android:textColor="@color/OnSecondary"
-            android:text="@string/term_1"
-            tools:ignore="SmallSp" />
+            <ProgressBar
+                android:id="@+id/Term1ProgressBar"
+                style="@style/ProgressBarStyle"
+                android:layout_width="257dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/Term1Progress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView20"
+                app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:alpha=".2"
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="22dp"
-            android:textColor="@color/OnSecondary"
-            android:fontFamily="@font/kanit_bold"
-            android:text="@string/document"
-            tools:ignore="SmallSp" />
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:src="@drawable/ic_mdi_file_download"
+                app:layout_constraintBottom_toTopOf="@+id/textView20"
+                app:layout_constraintEnd_toEndOf="@+id/textView21"
+                app:layout_constraintStart_toStartOf="@+id/textView21"
+                app:layout_constraintTop_toBottomOf="@+id/textView21"
+                tools:ignore="ContentDescription" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:alpha=".4"
-            android:fontFamily="@font/kanit"
-            android:textSize="8sp"
-            android:layout_marginStart="82dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginTop="8dp"
-            android:textColor="@color/OnSecondary"
-            android:text="@string/term1_description"
-            tools:ignore="SmallSp" />
+            <TextView
+                android:id="@+id/textView21"
+                style="@style/SectionTitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="15dp"
+                android:text="@string/term_1"
+                app:layout_constraintEnd_toStartOf="@+id/textView22"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/Term1Progress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="6sp"
-            android:textColor="@color/OnSecondary"
-            android:fontFamily="@font/kanit"
-            android:alpha=".4"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="7dp"
-            android:layout_marginStart="82dp"
-            android:text="@string/detailCurrentProgress"
-            tools:ignore="SmallSp" />
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha=".2"
+                android:fontFamily="@font/kanit_bold"
+                android:text="@string/document"
+                android:textColor="@color/OnSecondary"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                app:layout_constraintStart_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toBottomOf="@+id/imageView5"
+                tools:ignore="SmallSp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="6sp"
-            android:textColor="@color/OnSecondary"
-            android:fontFamily="@font/kanit"
-            android:alpha=".4"
-            android:layout_gravity="bottom|end"
-            android:layout_marginBottom="7dp"
-            android:layout_marginEnd="17dp"
-            android:text="@string/document_in_review"
-            tools:ignore="SmallSp"/>
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="257dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="4dp"
+                android:alpha=".4"
+                android:fontFamily="@font/kanit"
+                android:text="@string/term1_description"
+                android:textColor="@color/OnSecondary"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toTopOf="@+id/Term1ProgressBar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.058"
+                app:layout_constraintStart_toEndOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SmallSp" />
 
+            <TextView
+                android:id="@+id/Term1Progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:alpha=".4"
+                android:text="@string/detailCurrentProgress"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="@+id/Term1ProgressBar"
+                app:layout_constraintTop_toBottomOf="@+id/Term1ProgressBar"
+                tools:ignore="SmallSp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:alpha=".4"
+                android:fontFamily="@font/kanit"
+                android:text="@string/document_in_review"
+                android:textColor="@color/OnSecondary"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="@+id/Term1ProgressBar"
+                app:layout_constraintTop_toBottomOf="@+id/Term1ProgressBar" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardTerm2"
-        android:layout_width="347dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="4dp"
+        style="@style/CardStyle"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="10sp"
         app:layout_constraintBottom_toTopOf="@+id/cardTerm3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardTerm1">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="28dp"
-            android:textSize="10sp"
-            android:fontFamily="@font/kanit"
-            android:textColor="@color/OnSecondary"
-            android:text="@string/term_2"
-            tools:ignore="SmallSp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:textColor="@color/OnSecondary"
-            android:alpha=".4"
-            android:fontFamily="@font/kanit"
-            android:layout_marginTop="23dp"
-            android:layout_marginStart="100dp"
-            android:layout_marginEnd="21dp"
-            android:layout_marginBottom="12dp"
-            android:text="@string/locked_command"
-            tools:ignore="SmallSp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/ic_baseline_lock_24"
-            tools:ignore="ContentDescription" />
+        <include
+            layout="@layout/layout_progress_lock"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+            <TextView
+                android:id="@+id/title_term2"
+                style="@style/SectionTitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/term_2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardTerm3"
-        android:layout_width="347dp"
-        android:layout_height="75dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="11dp"
+        style="@style/CardStyle"
+        app:cardCornerRadius="10sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardTerm2">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="28dp"
-            android:textSize="10sp"
-            android:fontFamily="@font/kanit"
-            android:textColor="@color/OnSecondary"
-            android:text="@string/term_3"
-            tools:ignore="SmallSp" />
+        <include
+            layout="@layout/layout_progress_lock"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16dp">
+            <TextView
+                android:id="@+id/title_term3"
+                style="@style/SectionTitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/term_3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="10sp"
-            android:textColor="@color/OnSecondary"
-            android:alpha=".4"
-            android:fontFamily="@font/kanit"
-            android:layout_marginTop="23dp"
-            android:layout_marginStart="100dp"
-            android:layout_marginEnd="21dp"
-            android:layout_marginBottom="12dp"
-            android:text="@string/locked_command"
-            tools:ignore="SmallSp" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="30dp"
-            android:src="@drawable/ic_baseline_lock_24"
-            tools:ignore="ContentDescription" />
     </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -2,415 +2,421 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraint_detail_idea"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/constraint_detail_idea"
-    android:padding="16dp"
-    android:background="@color/grey">
+    android:background="@color/grey"
+    android:padding="16dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardDetail"
-        style="@style/CardStyle"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        app:cardCornerRadius="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView8"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
-
-
-            <ProgressBar
-                android:id="@+id/detailProgressBar"
-                style="@style/ProgressBarStyle"
-                android:layout_marginTop="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailCurrentFund" />
-
-            <Button
-            android:id="@+id/DonateButton"
-            android:layout_width="112dp"
-            android:layout_height="40dp"
-            android:layout_gravity="end"
-            android:layout_marginEnd="76dp"
-            android:textSize="14sp"
-            android:fontFamily="@font/kanit"
-            android:textAllCaps="false"
-            android:text="@string/donate"
-            app:layout_constraintStart_toStartOf="@+id/detailClockImage"
-            app:layout_constraintTop_toBottomOf="@+id/detailDuration" />
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/detailImage"
-                android:layout_width="169dp"
-                android:layout_height="169dp"
-                app:cardCornerRadius="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:id="@+id/img_brand"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:contentDescription="@string/brand_name"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_sample_photo" />
-
-            </androidx.cardview.widget.CardView>
-
-            <ImageView
-                android:id="@+id/detailFileProposal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/ic_mdi_file_download"
-                app:layout_constraintBottom_toBottomOf="@+id/detailStatusFund"
-                app:layout_constraintStart_toEndOf="@+id/detailStatusFund"
-                app:layout_constraintTop_toTopOf="@+id/detailStatusFund"
-                tools:ignore="ContentDescription" />
-
-        <ImageView
-            android:id="@+id/detailClockImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/detailLocation"
-            app:layout_constraintTop_toBottomOf="@+id/detailLocation"
-            android:src="@drawable/ic_baseline_access_time_24"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardDetail"
+            style="@style/CardStyle"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/detailName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/kanit_bold"
-                android:text="@string/brand_name"
-                android:textColor="@color/OnSecondary"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/detailImage"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-            android:id="@+id/detailBrandType"
-            style="@style/SubtitleDetailBrand"
-            android:text="@string/brand_type"
-            app:layout_constraintStart_toStartOf="@+id/detailName"
-            app:layout_constraintTop_toBottomOf="@+id/detailName" />
-
-        <TextView
-            android:id="@+id/detailLocation"
-            style="@style/SubtitleDetailBrand"
-            android:text="@string/location"
-            app:layout_constraintStart_toStartOf="@+id/detailBrandType"
-            app:layout_constraintTop_toBottomOf="@+id/detailBrandType" />
-
-        <TextView
-            android:id="@+id/detailDuration"
-            style="@style/SubtitleDetailBrand"
-            android:text="@string/xx_days_left"
-            android:layout_marginStart="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/detailClockImage"
-            app:layout_constraintStart_toEndOf="@+id/detailClockImage"
-            app:layout_constraintTop_toTopOf="@+id/detailClockImage"/>
-
-            <TextView
-                android:id="@+id/detailStatusFund"
-                style="@style/StatusIdeStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@color/red"
-                android:text="@string/unfulfilled"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailImage" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/kanit_bold"
-                android:lineHeight="12sp"
-                android:text="@string/proposal_file"
-                android:textColor="@color/greytext"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/detailFileProposal"
-                app:layout_constraintStart_toEndOf="@+id/detailFileProposal"
-                app:layout_constraintTop_toTopOf="@+id/detailFileProposal"
-                tools:targetApi="p" />
-
-            <TextView
-                android:id="@+id/detailCurrentFund"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/kanit"
-                android:text="@string/half_quantity"
-                android:textColor="@color/OnSecondary"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailStatusFund" />
-
-        <TextView
-            android:id="@+id/detailTotalFund"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/kanit"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/detailCurrentFund"
+            android:layout_marginEnd="8dp"
+            app:cardCornerRadius="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView8"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/detailCurrentFund"
-            android:textColor="@color/OnSecondary"
-            android:text="@string/quantity"
-            tools:ignore="SmallSp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/detailCurrentProgress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:alpha=".4"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/detailProgressBar"
-            app:layout_constraintTop_toBottomOf="@+id/detailProgressBar"
-            android:text="@string/detailCurrentProgress"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="@string/collected"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/detailProgressBar"
-            app:layout_constraintTop_toBottomOf="@+id/detailProgressBar" />
-
-        <TextView
-            android:id="@+id/detailDescTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/SectionTitleStyle"
-            android:textSize="16sp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintStart_toStartOf="@+id/detailCurrentProgress"
-            app:layout_constraintTop_toBottomOf="@+id/detailCurrentProgress"
-            android:textColor="@color/OnSecondary"
-            android:text="@string/description"/>
-
-            <TextView
-                android:id="@+id/detailDescription"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:alpha=".6"
-                android:fontFamily="@font/kanit"
-                android:maxLines="10"
-                android:text="@string/lorem_ipsum"
-                android:textColor="@color/OnSecondary"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailDescTitle" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                android:padding="16dp">
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/SectionTitleStyle"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="4dp"
-        android:text="@string/progress_update"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/cardTerm1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardDetail" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardTerm1"
-        style="@style/CardStyle"
-        app:cardCornerRadius="10sp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardTerm2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView8">
+                <ProgressBar
+                    android:id="@+id/detailProgressBar"
+                    style="@style/ProgressBarStyle"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailCurrentFund" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+                <Button
+                    android:id="@+id/DonateButton"
+                    android:layout_width="112dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="76dp"
+                    android:fontFamily="@font/kanit"
+                    android:text="@string/donate"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="@+id/detailClockImage"
+                    app:layout_constraintTop_toBottomOf="@+id/detailDuration" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/detailImage"
+                    android:layout_width="169dp"
+                    android:layout_height="169dp"
+                    app:cardCornerRadius="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageView
+                        android:id="@+id/img_brand"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:contentDescription="@string/brand_name"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_sample_photo" />
+
+                </androidx.cardview.widget.CardView>
+
+                <ImageView
+                    android:id="@+id/detailFileProposal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/ic_mdi_file_download"
+                    app:layout_constraintBottom_toBottomOf="@+id/detailStatusFund"
+                    app:layout_constraintStart_toEndOf="@+id/detailStatusFund"
+                    app:layout_constraintTop_toTopOf="@+id/detailStatusFund"
+                    tools:ignore="ContentDescription" />
+
+                <ImageView
+                    android:id="@+id/detailClockImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/ic_baseline_access_time_24"
+                    app:layout_constraintStart_toStartOf="@+id/detailLocation"
+                    app:layout_constraintTop_toBottomOf="@+id/detailLocation"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/detailName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/kanit_bold"
+                    android:text="@string/brand_name"
+                    android:textColor="@color/OnSecondary"
+                    android:textSize="24sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/detailImage"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/detailBrandType"
+                    style="@style/SubtitleDetailBrand"
+                    android:text="@string/brand_type"
+                    app:layout_constraintStart_toStartOf="@+id/detailName"
+                    app:layout_constraintTop_toBottomOf="@+id/detailName" />
+
+                <TextView
+                    android:id="@+id/detailLocation"
+                    style="@style/SubtitleDetailBrand"
+                    android:text="@string/location"
+                    app:layout_constraintStart_toStartOf="@+id/detailBrandType"
+                    app:layout_constraintTop_toBottomOf="@+id/detailBrandType" />
+
+                <TextView
+                    android:id="@+id/detailDuration"
+                    style="@style/SubtitleDetailBrand"
+                    android:layout_marginStart="4dp"
+                    android:text="@string/xx_days_left"
+                    app:layout_constraintBottom_toBottomOf="@+id/detailClockImage"
+                    app:layout_constraintStart_toEndOf="@+id/detailClockImage"
+                    app:layout_constraintTop_toTopOf="@+id/detailClockImage" />
+
+                <TextView
+                    android:id="@+id/detailStatusFund"
+                    style="@style/StatusIdeStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/red"
+                    android:text="@string/unfulfilled"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailImage" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/kanit_bold"
+                    android:lineHeight="12sp"
+                    android:text="@string/proposal_file"
+                    android:textColor="@color/greytext"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/detailFileProposal"
+                    app:layout_constraintStart_toEndOf="@+id/detailFileProposal"
+                    app:layout_constraintTop_toTopOf="@+id/detailFileProposal"
+                    tools:targetApi="p" />
+
+                <TextView
+                    android:id="@+id/detailCurrentFund"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/kanit"
+                    android:text="@string/half_quantity"
+                    android:textColor="@color/OnSecondary"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailStatusFund" />
+
+                <TextView
+                    android:id="@+id/detailTotalFund"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/kanit"
+                    android:text="@string/quantity"
+                    android:textColor="@color/OnSecondary"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/detailCurrentFund"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/detailCurrentFund"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:id="@+id/detailCurrentProgress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alpha=".4"
+                    android:text="@string/detailCurrentProgress"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@+id/detailProgressBar"
+                    app:layout_constraintTop_toBottomOf="@+id/detailProgressBar" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="@string/collected"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/detailProgressBar"
+                    app:layout_constraintTop_toBottomOf="@+id/detailProgressBar" />
+
+                <TextView
+                    android:id="@+id/detailDescTitle"
+                    style="@style/SectionTitleStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/description"
+                    android:textColor="@color/OnSecondary"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="@+id/detailCurrentProgress"
+                    app:layout_constraintTop_toBottomOf="@+id/detailCurrentProgress" />
+
+                <TextView
+                    android:id="@+id/detailDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:alpha=".6"
+                    android:fontFamily="@font/kanit"
+                    android:maxLines="10"
+                    android:text="@string/lorem_ipsum"
+                    android:textColor="@color/OnSecondary"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/detailDescTitle" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/textView8"
+            style="@style/SectionTitleStyle"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/progress_update"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toTopOf="@+id/cardTerm1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardDetail" />
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardTerm1"
+            style="@style/CardStyle"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/cardTerm2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8">
 
-            <ProgressBar
-                android:id="@+id/Term1ProgressBar"
-                style="@style/ProgressBarStyle"
-                android:layout_width="257dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="4dp"
-                app:layout_constraintBottom_toTopOf="@+id/Term1Progress"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView20"
-                app:layout_constraintTop_toBottomOf="@+id/textView22" />
-
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:src="@drawable/ic_mdi_file_download"
-                app:layout_constraintBottom_toTopOf="@+id/textView20"
-                app:layout_constraintEnd_toEndOf="@+id/textView21"
-                app:layout_constraintStart_toStartOf="@+id/textView21"
-                app:layout_constraintTop_toBottomOf="@+id/textView21"
-                tools:ignore="ContentDescription" />
-
-            <TextView
-                android:id="@+id/textView21"
-                style="@style/SectionTitleStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="15dp"
-                android:text="@string/term_1"
-                app:layout_constraintEnd_toStartOf="@+id/textView22"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView20"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:alpha=".2"
-                android:fontFamily="@font/kanit_bold"
-                android:text="@string/document"
-                android:textColor="@color/OnSecondary"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/imageView5"
-                app:layout_constraintStart_toStartOf="@+id/imageView5"
-                app:layout_constraintTop_toBottomOf="@+id/imageView5"
-                tools:ignore="SmallSp" />
-
-            <TextView
-                android:id="@+id/textView22"
-                android:layout_width="257dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="14dp"
-                android:layout_marginBottom="4dp"
-                android:alpha=".4"
-                android:fontFamily="@font/kanit"
-                android:text="@string/term1_description"
-                android:textColor="@color/OnSecondary"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toTopOf="@+id/Term1ProgressBar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.058"
-                app:layout_constraintStart_toEndOf="@+id/imageView5"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="SmallSp" />
+                android:padding="16dp">
 
-            <TextView
-                android:id="@+id/Term1Progress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:alpha=".4"
-                android:text="@string/detailCurrentProgress"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@+id/Term1ProgressBar"
-                app:layout_constraintTop_toBottomOf="@+id/Term1ProgressBar"
-                tools:ignore="SmallSp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:alpha=".4"
-                android:fontFamily="@font/kanit"
-                android:text="@string/document_in_review"
-                android:textColor="@color/OnSecondary"
-                android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@+id/Term1ProgressBar"
-                app:layout_constraintTop_toBottomOf="@+id/Term1ProgressBar" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                <ProgressBar
+                    android:id="@+id/Term1ProgressBar"
+                    style="@style/ProgressBarStyle"
+                    android:layout_width="257dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="4dp"
+                    app:layout_constraintBottom_toTopOf="@+id/Term1Progress"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView20"
+                    app:layout_constraintTop_toBottomOf="@+id/textView22" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardTerm2"
-        style="@style/CardStyle"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        app:cardCornerRadius="10sp"
-        app:layout_constraintBottom_toTopOf="@+id/cardTerm3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardTerm1">
-        <include
-            layout="@layout/layout_progress_lock"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
-            <TextView
-                android:id="@+id/title_term2"
-                style="@style/SectionTitleStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/term_2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
+                <ImageView
+                    android:id="@+id/imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:src="@drawable/ic_mdi_file_download"
+                    app:layout_constraintBottom_toTopOf="@+id/textView20"
+                    app:layout_constraintEnd_toEndOf="@+id/textView21"
+                    app:layout_constraintStart_toStartOf="@+id/textView21"
+                    app:layout_constraintTop_toBottomOf="@+id/textView21"
+                    tools:ignore="ContentDescription" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardTerm3"
-        style="@style/CardStyle"
-        app:cardCornerRadius="10sp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardTerm2">
-        <include
-            layout="@layout/layout_progress_lock"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
-            <TextView
-                android:id="@+id/title_term3"
-                style="@style/SectionTitleStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/term_3"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/textView21"
+                    style="@style/SectionTitleStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="15dp"
+                    android:text="@string/term_1"
+                    app:layout_constraintEnd_toStartOf="@+id/textView22"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.cardview.widget.CardView>
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alpha=".2"
+                    android:fontFamily="@font/kanit_bold"
+                    android:text="@string/document"
+                    android:textColor="@color/OnSecondary"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView5"
+                    app:layout_constraintStart_toStartOf="@+id/imageView5"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView5"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:id="@+id/textView22"
+                    android:layout_width="257dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="4dp"
+                    android:alpha=".4"
+                    android:fontFamily="@font/kanit"
+                    android:text="@string/term1_description"
+                    android:textColor="@color/OnSecondary"
+                    android:textSize="10sp"
+                    app:layout_constraintBottom_toTopOf="@+id/Term1ProgressBar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.058"
+                    app:layout_constraintStart_toEndOf="@+id/imageView5"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:id="@+id/Term1Progress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:alpha=".4"
+                    android:text="@string/detailCurrentProgress"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@+id/Term1ProgressBar"
+                    app:layout_constraintTop_toBottomOf="@+id/Term1ProgressBar"
+                    tools:ignore="SmallSp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    android:alpha=".4"
+                    android:fontFamily="@font/kanit"
+                    android:text="@string/document_in_review"
+                    android:textColor="@color/OnSecondary"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/Term1ProgressBar"
+                    app:layout_constraintTop_toBottomOf="@+id/Term1ProgressBar" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardTerm2"
+            style="@style/CardStyle"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="10sp"
+            app:layout_constraintBottom_toTopOf="@+id/cardTerm3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardTerm1">
+
+            <include
+                layout="@layout/layout_progress_lock"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/title_term2"
+                    style="@style/SectionTitleStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/term_2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardTerm3"
+            style="@style/CardStyle"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            app:cardCornerRadius="10sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardTerm2">
+
+            <include
+                layout="@layout/layout_progress_lock"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/title_term3"
+                    style="@style/SectionTitleStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/term_3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

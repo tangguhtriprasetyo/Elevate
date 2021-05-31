@@ -1,32 +1,43 @@
 package com.bangkit.elevate.ui.dashboard
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.lifecycle.ViewModelProvider
 import com.bangkit.elevate.R
+import com.bangkit.elevate.data.UserEntity
 import com.bangkit.elevate.data.preference.UserPreference
 import com.bangkit.elevate.databinding.ActivityMainBinding
 import com.bangkit.elevate.ui.dashboard.funder.FunderProgressFragment
 import com.bangkit.elevate.ui.dashboard.home.HomeFragment
 import com.bangkit.elevate.ui.dashboard.ideator.IdeatorProgressFragment
 import com.bangkit.elevate.ui.dashboard.profile.ProfileFragment
+import com.bangkit.elevate.ui.login.LoginActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), FirebaseAuth.AuthStateListener {
 
     companion object {
         const val ADD_IDEA_FRAGMENT = "add_idea_fragment"
         const val CHILD_FRAGMENT = "child_fragment"
+        const val EXTRA_USER = "extra_user"
     }
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var mUserPreference: UserPreference
+    private lateinit var user: UserEntity
+    private lateinit var mainViewModel: MainViewModel
     private var doubleBackToExit = false
     private var isIdeator = false
+    private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,12 +45,26 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        mainViewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.NewInstanceFactory()
+        ).get(MainViewModel::class.java)
+
         mUserPreference = UserPreference(this)
+        user = intent.getParcelableExtra<UserEntity>(EXTRA_USER) as UserEntity
+
+        mainViewModel.setUserProfile(user.uid.toString()).observe(this, { userProfile ->
+            if (userProfile != null) {
+                user = userProfile
+            }
+        })
 
         val homeFragment = HomeFragment()
         val funderProgressFragment = FunderProgressFragment()
         val ideatorProgressFragment = IdeatorProgressFragment()
         val profileFragment = ProfileFragment()
+
+        val mBundle = Bundle()
 
         setCurrentFragment(homeFragment)
 
@@ -83,6 +108,25 @@ class MainActivity : AppCompatActivity() {
             replace(R.id.host_fragment_activity_main, fragment)
         }
         binding.bottomNav.visibility = View.VISIBLE
+    }
+
+    override fun onStart() {
+        super.onStart()
+        firebaseAuth.addAuthStateListener(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        firebaseAuth.removeAuthStateListener(this)
+    }
+
+    override fun onAuthStateChanged(@NonNull firebaseAuth: FirebaseAuth) {
+        val firebaseUser: FirebaseUser? = firebaseAuth.currentUser
+        if (firebaseUser == null) {
+            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
 
 }

@@ -3,11 +3,14 @@ package com.bangkit.elevate.ui.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import com.bangkit.elevate.data.UserEntity
-import com.bangkit.elevate.data.firebase.UserRepository
+import com.bangkit.elevate.data.firebase.FirebaseServices
 
 class LoginViewModel : ViewModel() {
-    private val userRepository: UserRepository = UserRepository()
+    private val firebaseServices: FirebaseServices = FirebaseServices()
 
     fun signInWithGoogle(idToken: String): LiveData<UserEntity> =
-        userRepository.signInWithGoogle(idToken)
+        firebaseServices.signInWithGoogle(idToken)
+
+    fun createdNewUser(authUser: UserEntity): LiveData<UserEntity> =
+        firebaseServices.createUserToFirestore(authUser)
 }

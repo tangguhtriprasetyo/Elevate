@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bangkit.elevate.R
+import com.bangkit.elevate.data.UserEntity
 import com.bangkit.elevate.databinding.ActivityLoginBinding
 import com.bangkit.elevate.ui.dashboard.MainActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -46,16 +47,17 @@ class LoginActivity : AppCompatActivity() {
                         loginViewModel.signInWithGoogle(account.idToken!!)
                             .observe(this, { userData ->
                                 if (userData != null) {
-                                    showLoading(false)
-                                    Toast.makeText(
-                                        this,
-                                        "Hello, ${userData.name}",
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                    val intent =
-                                        Intent(this@LoginActivity, MainActivity::class.java)
-                                    startActivity(intent)
-                                    finish()
+                                    if (userData.isNew == true) {
+                                        createNewUser(userData)
+                                    } else {
+                                        Toast.makeText(
+                                            this,
+                                            "Welcome back, ${userData.username}",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                        Log.d("oldUser", userData.username.toString())
+                                        gotoMainActivity(userData)
+                                    }
                                 }
                             })
                     } catch (e: ApiException) {
@@ -72,6 +74,29 @@ class LoginActivity : AppCompatActivity() {
             val signInIntent = googleSignInClient.signInIntent
             resultLauncher.launch(signInIntent)
         }
+    }
+
+    private fun createNewUser(userData: UserEntity) {
+        Log.d("createdNewUser", userData.username.toString())
+        loginViewModel.createdNewUser(userData).observe(this, { newUser ->
+            if (newUser.isCreated == true) {
+                Toast.makeText(
+                    this,
+                    "Hello ${userData.username}, Your Account Successfully Created!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                gotoMainActivity(newUser)
+            }
+        })
+    }
+
+    private fun gotoMainActivity(userData: UserEntity) {
+        showLoading(false)
+        val intent =
+            Intent(this@LoginActivity, MainActivity::class.java)
+        intent.putExtra(MainActivity.EXTRA_USER, userData)
+        startActivity(intent)
+        finish()
     }
 
     private fun initGoogleSignInClient() {

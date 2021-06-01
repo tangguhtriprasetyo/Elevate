@@ -145,7 +145,7 @@ class AddIdeaFragment : Fragment() {
             ideaData.brandName = etBrandName.text.toString()
             ideaData.businessIdea = etBusinessIdea.text.toString()
             ideaData.description = etDescription.text.toString()
-            ideaData.requiredCost = etCost.text.toString().toInt()
+            ideaData.requiredCost = etCost.text.toString().toLong()
             ideaData.location = etLocation.text.toString()
             ideaData.proposalFile = proposalUrl
             ideaData.logoFile = imgFilesUrl

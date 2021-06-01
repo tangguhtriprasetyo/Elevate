@@ -167,7 +167,8 @@ class IdeatorProgressFragment : Fragment() {
             tvCurrentFund.text = priceFormat.format(ideaData.currentFund)
             tvTotalFund.text = priceFormat.format(ideaData.requiredCost)
             progressFunding.progress = progressPercentage.roundToInt()
-            detailCurrentProgress.text = "$progressPercentage %"
+            val currentProgressPercentage = "${progressPercentage.roundToInt()} %"
+            detailCurrentProgress.text = currentProgressPercentage
 
             if (ideaData.term1Unlocked) {
                 ideatorTerm1ProgressLock.constraintProgressLock.visibility = View.GONE

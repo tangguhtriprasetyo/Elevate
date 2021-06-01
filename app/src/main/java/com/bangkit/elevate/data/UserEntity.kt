@@ -9,7 +9,7 @@ data class UserEntity(
     var activeIdea: Boolean? = false,
     var address: String? = null,
     var avatar: String? = null,
-    var balance: Int? = null,
+    var balance: Long = 0,
     var email: String? = null,
     var phone: String? = null,
     var uid: String? = null,

@@ -48,6 +48,9 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        if (arguments != null) {
+            userDataProfile = requireArguments().getParcelable("UserData")!!
+        }
 
         val topUpFrag = TopUpFragment()
         val withdrawnFrag = WithdrawnFragment()
@@ -57,7 +60,7 @@ class ProfileFragment : Fragment() {
         setRole()
 
 
-        mainViewModel.getProfileData()
+        mainViewModel.setUserProfile(userDataProfile.uid.toString())
             .observe(viewLifecycleOwner, androidx.lifecycle.Observer { userProfile ->
                 if (userProfile != null) {
                     userDataProfile = userProfile

@@ -8,41 +8,67 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.bangkit.elevate.R
+import com.bangkit.elevate.data.IdeaEntity
+import com.bangkit.elevate.data.UserEntity
 import com.bangkit.elevate.databinding.FragmentAddIdeaBinding
-import java.io.File
+import com.bangkit.elevate.ui.dashboard.MainViewModel
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class AddIdeaFragment : Fragment() {
 
     private lateinit var binding: FragmentAddIdeaBinding
+    private lateinit var userDataProfile: UserEntity
+    private lateinit var ideaData: IdeaEntity
+    private val mainViewModel: MainViewModel by activityViewModels()
+    private val ideatorViewModel: IdeatorViewModel by activityViewModels()
+    private lateinit var uriPath: Uri
+    private lateinit var uriImagePath: Uri
+    private lateinit var filesName: String
+    private lateinit var proposalUrl: String
+    private lateinit var imgFilesName: String
+    private lateinit var imgFilesUrl: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAddIdeaBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        ideaData = IdeaEntity()
+        userDataProfile = UserEntity()
+
+        mainViewModel.getProfileData()
+            .observe(viewLifecycleOwner, { userProfile ->
+                if (userProfile != null) {
+                    userDataProfile = userProfile
+                }
+                Log.d("ViewModelProfile: ", userProfile.toString())
+            })
 
         val getImage =
             registerForActivityResult(ActivityResultContracts.OpenDocument()) { uriImage ->
                 if (uriImage.path != null) {
 
-                    var imgPath = uriImage.path
-                    val imgCut = imgPath?.lastIndexOf('/')
-                    if (imgCut != -1) {
-                        imgPath = imgCut?.plus(1)?.let { imgPath?.substring(it) }
+                    uriImagePath = uriImage
+                    imgFilesName = uriImage.path.toString()
+                    val cut = imgFilesName.lastIndexOf('/')
+                    if (cut != -1) {
+                        imgFilesName = imgFilesName.substring(cut + 1)
                     }
                     with(binding) {
                         titleBrowsePhoto.visibility = View.GONE
                         photoAfterUpload.visibility = View.VISIBLE
                         titleImgAfterUpload.visibility = View.VISIBLE
 
-                        titleImgAfterUpload.text = imgPath
-                        photoAfterUpload.setImageURI(uriImage)
+                        titleImgAfterUpload.text = imgFilesName
+                        photoAfterUpload.setImageURI(uriImagePath)
                     }
                 }
             }
@@ -50,30 +76,18 @@ class AddIdeaFragment : Fragment() {
         val getPdf = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uriPdf ->
 
             if (uriPdf.path != null) {
-                val file = Uri.fromFile(File(uriPdf.path.toString()))
-                var path = uriPdf.path
-                val cut = path?.lastIndexOf('/')
+                uriPath = uriPdf
+                filesName = uriPdf.path.toString()
+                val cut = filesName.lastIndexOf('/')
                 if (cut != -1) {
-                    path = cut?.plus(1)?.let { path?.substring(it) }
+                    filesName = filesName.substring(cut + 1)
                 }
 
                 with(binding) {
                     icProposalAfterUpload.visibility = View.VISIBLE
                     titleBrowseProposal.visibility = View.VISIBLE
                     titleAfterUpload.visibility = View.VISIBLE
-                    titleAfterUpload.text = path
-
-                    Log.d("getPdfPath: ", uriPdf.path.toString())
-                    Log.d("getPdfPathSegment: ", uriPdf.pathSegments.toString())
-                    Log.d("getPdfLastPathSegment: ", uriPdf.lastPathSegment.toString())
-                    Log.d("getPdfLastPathSegment: ", uriPdf.lastPathSegment.toString())
-                    Log.d("getUserInfo: ", uriPdf.userInfo.toString())
-                    Log.d("encodedPath: ", uriPdf.encodedPath.toString())
-                    Log.d("encodedQuery: ", uriPdf.encodedQuery.toString())
-                    Log.d("queryParameterNames: ", uriPdf.queryParameterNames.toString())
-                    Log.d("scheme: ", uriPdf.scheme.toString())
-                    Log.d("schemeSpecificPart: ", uriPdf.schemeSpecificPart.toString())
-                    Log.d("File: ", file.toString())
+                    titleAfterUpload.text = filesName
                 }
             }
         }
@@ -86,5 +100,77 @@ class AddIdeaFragment : Fragment() {
             getImage.launch(arrayOf("image/*"))
         }
 
+        binding.btnSubmitIdea.setOnClickListener {
+            uploadFiles()
+        }
+
+    }
+
+    private fun uploadFiles() {
+        //TODO Check Error
+
+        showLoading(true)
+        ideatorViewModel.uploadFiles(
+            uriPath,
+            "${userDataProfile.uid.toString()}${userDataProfile.username}",
+            "PDF",
+            filesName
+        ).observe(viewLifecycleOwner, { downloadUrl ->
+            if (downloadUrl != null) {
+                proposalUrl = downloadUrl.toString()
+                uploadImg()
+                Log.d("proposalUrl: ", proposalUrl)
+            }
+        })
+    }
+
+    private fun uploadImg() {
+        ideatorViewModel.uploadImages(
+            uriImagePath,
+            "${userDataProfile.uid.toString()}${userDataProfile.username}",
+            "Images",
+            imgFilesName
+        ).observe(viewLifecycleOwner, { downloadUrl ->
+            if (downloadUrl != null) {
+                imgFilesUrl = downloadUrl.toString()
+                uploadAllDataIdea()
+                Log.d("imgFilesUrl: ", imgFilesUrl)
+            }
+            Log.d("imgFilesUrl: ", downloadUrl.toString())
+        })
+    }
+
+    private fun uploadAllDataIdea() {
+        with(binding) {
+            ideaData.brandName = etBrandName.text.toString()
+            ideaData.businessIdea = etBusinessIdea.text.toString()
+            ideaData.description = etDescription.text.toString()
+            ideaData.requiredCost = etCost.text.toString().toInt()
+            ideaData.location = etLocation.text.toString()
+            ideaData.proposalFile = proposalUrl
+            ideaData.logoFile = imgFilesUrl
+            ideaData.ideatorUid = userDataProfile.uid
+            ideaData.status = getString(R.string.unfulfilled)
+        }
+
+        ideatorViewModel.postIdeaData(ideaData, userDataProfile.uid.toString())
+            .observe(viewLifecycleOwner, { isSuccessful ->
+                if (isSuccessful) {
+                    showLoading(false)
+
+                    val bottomNav: BottomNavigationView =
+                        requireActivity().findViewById(R.id.bottom_nav)
+                    bottomNav.visibility = View.VISIBLE
+                    requireActivity().supportFragmentManager.popBackStackImmediate()
+                }
+            })
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBarAddIdea.visibility = View.VISIBLE
+        } else {
+            binding.progressBarAddIdea.visibility = View.GONE
+        }
     }
 }

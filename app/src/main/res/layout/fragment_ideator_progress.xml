@@ -10,13 +10,11 @@
         android:id="@+id/layout_empty_idea"
         layout="@layout/layout_ideator_empty"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="visible" />
+        android:layout_height="match_parent" />
 
     <include
         android:id="@+id/layout_ideator_progress"
         layout="@layout/layout_ideator_progress"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:layout_height="match_parent" />
 </FrameLayout>

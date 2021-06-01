@@ -57,4 +57,7 @@
     <string name="term1_progress">To completed this phase, Please provide a budget plan document for the initial stages of your funding in pdf form.</string>
     <string name="proposal_file">Proposal File</string>
     <string name="pdf_name">Pdf Name</string>
+    <string name="process_term1">On Process Term 1</string>
+    <string name="process_term2">On Process Term 2</string>
+    <string name="completed">Completed</string>
 </resources>

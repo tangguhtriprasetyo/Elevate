@@ -16,4 +16,5 @@
     <color name="OnSecondary">#1B3151</color>
     <color name="mtrl_textinput_default_box_stroke_color">#1B3151</color>
     <color name="greytext">#646465</color>
+    <color name="green">#00AB66</color>
 </resources>

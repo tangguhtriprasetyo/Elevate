@@ -203,6 +203,7 @@
             android:ellipsize="end"
             android:fontFamily="@font/kanit"
             android:maxWidth="256dp"
+            android:maxLines="1"
             android:text="@string/pdf_name"
             android:textAlignment="center"
             android:visibility="gone"
@@ -237,9 +238,9 @@
             android:id="@+id/title_browse_photo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="visible"
             android:fontFamily="@font/kanit"
             android:text="Click to browse your files"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="@+id/border_line_brand_photo"
             app:layout_constraintEnd_toEndOf="@+id/border_line_brand_photo"
             app:layout_constraintStart_toStartOf="@+id/border_line_brand_photo"
@@ -316,6 +317,18 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar_add_idea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:progress="100" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

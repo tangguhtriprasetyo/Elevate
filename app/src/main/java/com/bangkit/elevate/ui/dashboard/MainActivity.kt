@@ -65,6 +65,11 @@ class MainActivity : AppCompatActivity(), FirebaseAuth.AuthStateListener {
         val profileFragment = ProfileFragment()
 
         val mBundle = Bundle()
+        mBundle.putParcelable("UserData", user)
+        homeFragment.arguments = mBundle
+        funderProgressFragment.arguments = mBundle
+        ideatorProgressFragment.arguments = mBundle
+        profileFragment.arguments = mBundle
 
         setCurrentFragment(homeFragment)
 

@@ -1,96 +1,114 @@
-package com.bangkit.elevate
+package com.bangkit.elevate.ui.detail
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.bangkit.elevate.R
 import com.bangkit.elevate.data.IdeaEntity
 import com.bangkit.elevate.data.UserEntity
-import com.bangkit.elevate.databinding.FragmentIdeatorProgressBinding
-import com.bangkit.elevate.databinding.LayoutDetailIdeaBinding
+import com.bangkit.elevate.databinding.FragmentDetailIdeaBinding
 import com.bangkit.elevate.ui.bottomsheet.BottomSheetDonateFragment
-import com.bangkit.elevate.ui.bottomsheet.BottomSheetUploadFragment
-import com.bangkit.elevate.ui.dashboard.MainActivity
 import com.bangkit.elevate.ui.dashboard.MainViewModel
-import com.bangkit.elevate.ui.dashboard.ideator.AddIdeaFragment
-import com.bangkit.elevate.ui.dashboard.ideator.IdeatorViewModel
 import com.bangkit.elevate.utils.loadImage
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.text.NumberFormat
 import java.util.*
 import kotlin.math.roundToInt
 
-class DetailIdeaFragment: Fragment() {
-    private lateinit var binding: LayoutDetailIdeaBinding
+@ExperimentalCoroutinesApi
+class DetailIdeaFragment : Fragment() {
+
+    companion object {
+        const val EXTRA_DATA_IDEA = "extra_data_idea"
+        const val EXTRA_DATA_USER = "extra_data_user"
+    }
+
+    private lateinit var binding: FragmentDetailIdeaBinding
     private val mainViewModel: MainViewModel by activityViewModels()
     private val detailIdeaViewModel: DetailIdeaViewModel by activityViewModels()
     private lateinit var userDataProfile: UserEntity
     private lateinit var ideaData: IdeaEntity
-    private lateinit var uriPath: Uri
-    private lateinit var filesName: String
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        binding = LayoutDetailIdeaBinding.inflate(inflater, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentDetailIdeaBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val addIdeaFragment = AddIdeaFragment()
         val bottomSheetDonate = BottomSheetDonateFragment()
-        val bottomSheetUpload = BottomSheetUploadFragment()
 
         userDataProfile = UserEntity()
         ideaData = IdeaEntity()
 
         if (arguments != null) {
-            userDataProfile = requireArguments().getParcelable("UserData")!!
+            ideaData = requireArguments().getParcelable(EXTRA_DATA_IDEA)!!
+            userDataProfile = requireArguments().getParcelable(EXTRA_DATA_USER)!!
+            Log.d("User Profile DetailIDea", userDataProfile.balance.toString())
+            setIdeaData()
         }
 
-        val getPdf = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uriPdf ->
+        detailIdeaViewModel.successfulDonate.observe(viewLifecycleOwner, { isDonated ->
+            if (isDonated) {
+                Log.d("SuccessDonate", "Success")
 
-            if (uriPdf.path != null) {
-                uriPath = uriPdf
-                filesName = uriPdf.path.toString()
-                val cut = filesName.lastIndexOf('/')
-                if (cut != -1) {
-                    filesName = filesName.substring(cut + 1)
-                }
+                mainViewModel.setUserProfile(userDataProfile.uid.toString())
+                    .observe(viewLifecycleOwner, { userProfile ->
+                        if (userProfile != null) {
+                            userDataProfile = userProfile
+                        }
+                        Log.d("ViewModelProfile: ", userProfile.toString())
+                    })
 
-                val mBundle = Bundle()
-                mBundle.putString(BottomSheetUploadFragment.EXTRA_FILE, uriPath.toString())
-                mBundle.putString(BottomSheetUploadFragment.EXTRA_FILE_NAME, filesName)
-                mBundle.putString(BottomSheetUploadFragment.EXTRA_UID, userDataProfile.uid)
-                mBundle.putString(BottomSheetUploadFragment.EXTRA_NAME, userDataProfile.username)
-                bottomSheetUpload.arguments = mBundle
-                bottomSheetUpload.show(
-                    requireActivity().supportFragmentManager,
-                    BottomSheetUploadFragment::class.java.simpleName
-                )
-
+                detailIdeaViewModel.getIdeaData(ideaData.ideatorUid.toString())
+                    .observe(viewLifecycleOwner, { task ->
+                        if (task != null) {
+                            ideaData = task
+                            setIdeaData()
+                        }
+                    })
+                detailIdeaViewModel.getStatusDonation(false)
             }
+        })
+
+        binding.DonateButton.setOnClickListener {
+            val mBundle = Bundle()
+            mBundle.putString(BottomSheetDonateFragment.EXTRA_IDEA_ID, ideaData.ideatorUid)
+            mBundle.putString(BottomSheetDonateFragment.EXTRA_USER_ID, userDataProfile.uid)
+            mBundle.putLong(BottomSheetDonateFragment.EXTRA_BALANCED_USER, userDataProfile.balance)
+            bottomSheetDonate.arguments = mBundle
+            Log.d("Balanced DetailIDea", userDataProfile.balance.toString())
+            bottomSheetDonate.show(
+                requireActivity().supportFragmentManager,
+                BottomSheetDonateFragment::class.java.simpleName
+            )
         }
-        //TODO
-//        binding.layoutIdeatorProgress.icProposal.setOnClickListener {
-//            bottomSheetDonate.show(
-//                requireActivity().supportFragmentManager,
-//                BottomSheetDonateFragment::class.java.simpleName
-//            )
-//        }
-//
-//        binding.layoutIdeatorProgress.btnAddTerm1.setOnClickListener {
-//            getPdf.launch(arrayOf("application/pdf"))
-//        }
+
+        binding.detailFileProposal.setOnClickListener {
+            openPdftoBrowser()
+        }
+
+    }
+
+    private fun openPdftoBrowser() {
+        val intentBrowser = Intent(Intent.ACTION_VIEW, Uri.parse(ideaData.proposalFile))
+        startActivity(intentBrowser)
     }
 
     private fun setIdeaData() {
+
         val localeId = Locale("in", "ID")
         val priceFormat = NumberFormat.getCurrencyInstance(localeId)
         val currentFund = ideaData.currentFund.toDouble()
@@ -121,6 +139,7 @@ class DetailIdeaFragment: Fragment() {
                 Term1Progress.visibility = View.VISIBLE
                 Term1FinalProgress.visibility = View.VISIBLE
                 Term1Proposal.visibility = View.VISIBLE
+
             } else {
                 term1Locked.constraintProgressLock.visibility = View.VISIBLE
                 Term1ProgressBar.visibility = View.GONE

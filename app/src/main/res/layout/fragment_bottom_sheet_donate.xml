@@ -44,4 +44,14 @@
         app:layout_constraintTop_toBottomOf="@+id/et_donate_dialog"
         tools:layout_editor_absoluteX="32dp" />
 
+    <ProgressBar
+        android:id="@+id/progress_bar_donate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

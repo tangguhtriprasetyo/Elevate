@@ -1,9 +1,11 @@
 package com.bangkit.elevate.data.firebase
 
+import android.content.ContentValues.TAG
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.bangkit.elevate.data.FundedIdeasEntity
 import com.bangkit.elevate.data.IdeaEntity
 import com.bangkit.elevate.data.UserEntity
 import com.google.firebase.auth.FirebaseAuth
@@ -16,8 +18,14 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.launch
 
+@ExperimentalCoroutinesApi
 class FirebaseServices {
 
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -151,6 +159,55 @@ class FirebaseServices {
         return isSuccessful
     }
 
+    fun updateDonation(
+        uid: String,
+        ideatorId: String,
+        totalDonate: Long,
+        userBalance: Long
+    ): LiveData<Boolean> {
+        val isSuccessful = MutableLiveData<Boolean>()
+        CoroutineScope(IO).launch {
+            val docRef: DocumentReference = ideasRef.document(ideatorId)
+            docRef.get().addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val document: DocumentSnapshot? = task.result
+                    if (document?.exists() == true) {
+                        val currentDonation: Long = document.get("currentFund") as Long
+                        Log.d("currentDonation: ", currentDonation.toString())
+                        docRef.update("currentFund", currentDonation + totalDonate)
+                            .addOnCompleteListener {
+                                if (it.isSuccessful) {
+                                    val docUserRef = userRef.document(uid)
+                                    docUserRef.update("balance", userBalance - totalDonate)
+                                        .addOnCompleteListener { newBalance ->
+                                            if (newBalance.isSuccessful) {
+                                                isSuccessful.postValue(true)
+                                            } else {
+                                                isSuccessful.postValue(false)
+                                                Log.d(
+                                                    "errorUpdateBalance: ",
+                                                    it.exception?.message.toString()
+                                                )
+                                            }
+                                        }
+                                } else {
+                                    isSuccessful.postValue(false)
+                                    Log.d(
+                                        "errorUpdateDonation: ",
+                                        it.exception?.message.toString()
+                                    )
+                                }
+                            }
+                    }
+                }
+            }
+                .addOnFailureListener {
+                    Log.d("ErrorGetIdea: ", it.message.toString())
+                }
+        }
+        return isSuccessful
+    }
+
     fun editUserProfile(authUser: UserEntity): LiveData<UserEntity> {
         val editedUserData = MutableLiveData<UserEntity>()
         CoroutineScope(IO).launch {
@@ -210,10 +267,61 @@ class FirebaseServices {
                 }
             }
                 .addOnFailureListener {
-
+                    Log.d("Error getting Doc", it.message.toString())
                 }
         }
         return ideaData
+    }
+
+    fun getListIdeas(): Flow<List<IdeaEntity>?> {
+        return callbackFlow {
+            val listenerRegistration = firestoreRef.collection("Ideas")
+                .addSnapshotListener { querySnapshot: QuerySnapshot?, firestoreException: FirebaseFirestoreException? ->
+                    if (firestoreException != null) {
+                        cancel(
+                            message = "Error fetching posts",
+                            cause = firestoreException
+                        )
+                        return@addSnapshotListener
+                    }
+                    val listIdeaData = querySnapshot?.documents?.mapNotNull {
+                        it.toObject<IdeaEntity>()
+                    }
+                    offer(listIdeaData)
+                    val docReference = querySnapshot?.documents!![0].reference
+                    Log.d("docReference", docReference.toString())
+                    Log.d("docReference", docReference.path.toString())
+                }
+            awaitClose {
+                Log.d(TAG, "getListIdeas: ")
+                listenerRegistration.remove()
+            }
+        }
+    }
+
+    fun getListFundedIdeas(uid: String): Flow<List<FundedIdeasEntity>?> {
+        return callbackFlow {
+            val listenerRegistration =
+                firestoreRef.collection("User").document(uid).collection("FundedIdeas")
+                    .addSnapshotListener { querySnapshot: QuerySnapshot?, firestoreException: FirebaseFirestoreException? ->
+                        if (firestoreException != null) {
+                            cancel(
+                                message = "Error fetching posts",
+                                cause = firestoreException
+                            )
+                            return@addSnapshotListener
+                        }
+                        val listFundedIdeas = querySnapshot?.documents?.mapNotNull {
+                            it.toObject<FundedIdeasEntity>()
+                        }
+                        offer(listFundedIdeas)
+                        Log.d("FUNDEDIDEAS", listFundedIdeas.toString())
+                    }
+            awaitClose {
+                Log.d(TAG, "getListIdeas: ")
+                listenerRegistration.remove()
+            }
+        }
     }
 
 }

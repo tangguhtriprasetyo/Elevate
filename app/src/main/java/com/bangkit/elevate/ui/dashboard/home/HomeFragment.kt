@@ -1,20 +1,34 @@
 package com.bangkit.elevate.ui.dashboard.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.bangkit.elevate.R
+import com.bangkit.elevate.data.IdeaEntity
+import com.bangkit.elevate.data.UserEntity
 import com.bangkit.elevate.databinding.FragmentHomeBinding
+import com.bangkit.elevate.ui.dashboard.MainActivity
+import com.bangkit.elevate.ui.dashboard.MainViewModel
+import com.bangkit.elevate.ui.detail.DetailIdeaFragment
+import com.bangkit.elevate.utils.loadImage
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-class HomeFragment : Fragment() {
+@ExperimentalCoroutinesApi
+class HomeFragment : Fragment(), HomeClickCallback {
 
-    private lateinit var homeViewModel: HomeViewModel
+    @ExperimentalCoroutinesApi
+    private val homeViewModel: HomeViewModel by activityViewModels()
+    private val mainViewModel: MainViewModel by activityViewModels()
+    private lateinit var ideasData: IdeaEntity
+    private lateinit var userDataProfile: UserEntity
+
     private var _binding: FragmentHomeBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,16 +36,79 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-//        val textView: TextView = binding.textHome
-//        homeViewModel.text.observe(viewLifecycleOwner, Observer {
-//            textView.text = it
-//        })
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        showLoading(true)
+
+        ideasData = IdeaEntity()
+        userDataProfile = UserEntity()
+
+        if (arguments != null) {
+            userDataProfile = requireArguments().getParcelable("UserData")!!
+        }
+
+        mainViewModel.setUserProfile(userDataProfile.uid.toString())
+            .observe(viewLifecycleOwner, { userProfile ->
+                if (userProfile != null) {
+                    userDataProfile = userProfile
+                    binding.icAvatarHome.loadImage(userDataProfile.avatar)
+                }
+                Log.d("ViewModelProfile: ", userProfile.toString())
+            })
+
+        homeViewModel.getListIdeas().observe(viewLifecycleOwner, { listIdeas ->
+            if (listIdeas != null) {
+                Log.d("listIdeas: ", listIdeas.toString())
+                val homeAdapter = HomeAdapter(this@HomeFragment)
+                homeAdapter.setListIdeas(listIdeas)
+                with(binding.recyclerView) {
+                    layoutManager = LinearLayoutManager(requireContext())
+                    adapter = homeAdapter
+                }
+                showLoading(false)
+            }
+        })
+
+        binding.icFilterData.setOnClickListener {
+            // TODO MACHINE LEARNING
+        }
+
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.progressBarHome.visibility = View.VISIBLE
+        } else {
+            binding.progressBarHome.visibility = View.GONE
+        }
+    }
+
+    override fun onItemClicked(ideas: IdeaEntity) {
+
+        val mBundle = Bundle()
+        mBundle.putParcelable(DetailIdeaFragment.EXTRA_DATA_IDEA, ideas)
+        mBundle.putParcelable(DetailIdeaFragment.EXTRA_DATA_USER, userDataProfile)
+
+        val detailIdeaFragment = DetailIdeaFragment()
+        detailIdeaFragment.arguments = mBundle
+
+        val bottomNav: BottomNavigationView = requireActivity().findViewById(R.id.bottom_nav)
+        requireActivity().supportFragmentManager.beginTransaction().apply {
+            replace(
+                R.id.host_fragment_activity_main,
+                detailIdeaFragment,
+                MainActivity.CHILD_FRAGMENT
+            )
+            addToBackStack(null)
+            commit()
+        }
+        bottomNav.visibility = View.GONE
     }
 
     override fun onDestroyView() {

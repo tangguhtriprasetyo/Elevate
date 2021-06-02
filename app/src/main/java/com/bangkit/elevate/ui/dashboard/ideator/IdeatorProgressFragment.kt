@@ -14,7 +14,6 @@ import com.bangkit.elevate.R
 import com.bangkit.elevate.data.IdeaEntity
 import com.bangkit.elevate.data.UserEntity
 import com.bangkit.elevate.databinding.FragmentIdeatorProgressBinding
-import com.bangkit.elevate.ui.bottomsheet.BottomSheetDonateFragment
 import com.bangkit.elevate.ui.bottomsheet.BottomSheetUploadFragment
 import com.bangkit.elevate.ui.dashboard.MainActivity
 import com.bangkit.elevate.ui.dashboard.MainViewModel
@@ -47,7 +46,6 @@ class IdeatorProgressFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val addIdeaFragment = AddIdeaFragment()
-        val bottomSheetDonate = BottomSheetDonateFragment()
         val bottomSheetUpload = BottomSheetUploadFragment()
 
         userDataProfile = UserEntity()
@@ -90,7 +88,6 @@ class IdeatorProgressFragment : Fragment() {
                     requireActivity().supportFragmentManager,
                     BottomSheetUploadFragment::class.java.simpleName
                 )
-
             }
         }
 
@@ -126,10 +123,7 @@ class IdeatorProgressFragment : Fragment() {
         }
 
         binding.layoutIdeatorProgress.icProposal.setOnClickListener {
-            bottomSheetDonate.show(
-                requireActivity().supportFragmentManager,
-                BottomSheetDonateFragment::class.java.simpleName
-            )
+            // TODO view PDF
         }
 
         binding.layoutIdeatorProgress.btnAddTerm1.setOnClickListener {

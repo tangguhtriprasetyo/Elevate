@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -108,6 +109,23 @@ class AddIdeaFragment : Fragment() {
 
     private fun uploadFiles() {
         //TODO Check Error
+        with(binding){
+            if(etBrandName.text.toString().isEmpty()){
+                etBrandName.error = "Please enter a valid Brand Name"
+            }else if(etBrandName.text.toString().length > 25 ) {
+                etBrandName.error = "Your Brand name are too long"
+            }else if(etBusinessIdea.text.toString().isEmpty()){
+                etBusinessIdea.error = "Please enter your business idea"
+            }else if(etDescription.text.toString().isEmpty()||etDescription.text.toString().trim().length < 50 ) {
+                etDescription.error = "Your description idea needs to be filled or is too short"
+            }else if(etDescription.text.toString().trim().length > 200 ){
+                etDescription.error = "Your description are too long, Please simplify your description"
+            }else if(etCost.text.toString().isEmpty()){
+                etCost.error = "Please enter your required business fund"
+            }else if(etLocation.text.toString().isEmpty()){
+                etLocation.error = "Please enter your business idea"
+            }
+        }
 
         showLoading(true)
         ideatorViewModel.uploadFiles(

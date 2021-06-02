@@ -255,7 +255,7 @@
                 layout="@layout/layout_progress_lock"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"/>
+                android:visibility="visible"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/Term1Unlocked"
@@ -264,6 +264,7 @@
                 android:padding="16dp">
 
                 <ProgressBar
+                    android:visibility="gone"
                     android:id="@+id/Term1ProgressBar"
                     style="@style/ProgressBarStyle"
                     android:layout_width="257dp"
@@ -275,6 +276,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/Term1Description" />
 
                 <ImageView
+                    android:visibility="gone"
                     android:id="@+id/Term1Proposal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -297,6 +299,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/Term1FileType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -312,6 +315,7 @@
                     tools:ignore="SmallSp" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/Term1Description"
                     android:layout_width="257dp"
                     android:layout_height="match_parent"
@@ -331,6 +335,7 @@
                     tools:ignore="SmallSp" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/Term1Progress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -343,6 +348,7 @@
                     tools:ignore="SmallSp" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/Term1FinalProgress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -1,5 +1,6 @@
 package com.bangkit.elevate.ui.dashboard.ideator
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -37,7 +38,7 @@ class IdeatorProgressFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentIdeatorProgressBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -123,12 +124,17 @@ class IdeatorProgressFragment : Fragment() {
         }
 
         binding.layoutIdeatorProgress.icProposal.setOnClickListener {
-            // TODO view PDF
+            openPdftoBrowser()
         }
 
         binding.layoutIdeatorProgress.btnAddTerm1.setOnClickListener {
             getPdf.launch(arrayOf("application/pdf"))
         }
+    }
+
+    private fun openPdftoBrowser() {
+        val intentBrowser = Intent(Intent.ACTION_VIEW, Uri.parse(ideaData.proposalFile))
+        startActivity(intentBrowser)
     }
 
     private fun getIdeaData() {

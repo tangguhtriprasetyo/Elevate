@@ -30,7 +30,6 @@ class SplashScreenActivity : AppCompatActivity() {
                 user.uid = firebaseUser.uid
                 user.username = firebaseUser.displayName
                 val intent = Intent(this@SplashScreenActivity, MainActivity::class.java)
-                intent.putExtra(MainActivity.EXTRA_USER, user)
                 startActivity(intent)
                 finish()
 

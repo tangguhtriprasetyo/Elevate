@@ -18,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -56,7 +57,7 @@ class LoginActivity : AppCompatActivity() {
                                             Toast.LENGTH_LONG
                                         ).show()
                                         Log.d("oldUser", userData.username.toString())
-                                        gotoMainActivity(userData)
+                                        gotoMainActivity()
                                     }
                                 }
                             })
@@ -85,16 +86,16 @@ class LoginActivity : AppCompatActivity() {
                     "Hello ${userData.username}, Your Account Successfully Created!",
                     Toast.LENGTH_SHORT
                 ).show()
-                gotoMainActivity(newUser)
+                gotoMainActivity()
             }
         })
     }
 
-    private fun gotoMainActivity(userData: UserEntity) {
+    @ExperimentalCoroutinesApi
+    private fun gotoMainActivity() {
         showLoading(false)
         val intent =
             Intent(this@LoginActivity, MainActivity::class.java)
-        intent.putExtra(MainActivity.EXTRA_USER, userData)
         startActivity(intent)
         finish()
     }

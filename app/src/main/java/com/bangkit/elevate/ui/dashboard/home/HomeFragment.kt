@@ -58,22 +58,21 @@ class HomeFragment : Fragment(), HomeClickCallback {
                 if (userProfile != null) {
                     userDataProfile = userProfile
                     binding.icAvatarHome.loadImage(userDataProfile.avatar)
+                    homeViewModel.getListIdeas().observe(viewLifecycleOwner, { listIdeas ->
+                        if (listIdeas != null) {
+                            Log.d("listIdeas: ", listIdeas.toString())
+                            val homeAdapter = HomeAdapter(this@HomeFragment)
+                            homeAdapter.setListIdeas(listIdeas)
+                            with(binding.recyclerView) {
+                                layoutManager = LinearLayoutManager(requireContext())
+                                adapter = homeAdapter
+                            }
+                            showLoading(false)
+                        }
+                    })
                 }
                 Log.d("ViewModelProfile: ", userProfile.toString())
             })
-
-        homeViewModel.getListIdeas().observe(viewLifecycleOwner, { listIdeas ->
-            if (listIdeas != null) {
-                Log.d("listIdeas: ", listIdeas.toString())
-                val homeAdapter = HomeAdapter(this@HomeFragment)
-                homeAdapter.setListIdeas(listIdeas)
-                with(binding.recyclerView) {
-                    layoutManager = LinearLayoutManager(requireContext())
-                    adapter = homeAdapter
-                }
-                showLoading(false)
-            }
-        })
 
         binding.icFilterData.setOnClickListener {
             // TODO MACHINE LEARNING

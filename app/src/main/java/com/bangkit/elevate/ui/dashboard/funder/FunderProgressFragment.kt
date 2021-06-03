@@ -59,26 +59,29 @@ class FunderProgressFragment : Fragment(), HomeClickCallback {
                     if (userProfile.totalFunded > 0) {
                         binding.layoutEmptyFunder.constraintEmptyFunder.visibility = View.GONE
                         binding.listProgressFunder.visibility = View.VISIBLE
+
+                        funderProgressViewModel.getListFundedIdeas(userDataProfile.uid.toString())
+                            .observe(viewLifecycleOwner, { listFundedIdeas ->
+                                if (listFundedIdeas != null) {
+                                    val funderProgressAdapter =
+                                        FunderProgressAdapter(this@FunderProgressFragment)
+                                    funderProgressAdapter.setListIdeas(listFundedIdeas)
+                                    with(binding.listProgressFunder) {
+                                        layoutManager = LinearLayoutManager(requireContext())
+                                        adapter = funderProgressAdapter
+                                    }
+                                    showLoading(false)
+                                    Log.d("listFundedIdeasFunder: ", listFundedIdeas.toString())
+                                }
+                            })
                     } else {
                         binding.layoutEmptyFunder.constraintEmptyFunder.visibility = View.VISIBLE
                         binding.listProgressFunder.visibility = View.GONE
+                        showLoading(false)
                     }
                 }
                 Log.d("ViewModelProfile: ", userProfile.toString())
             })
-
-        funderProgressViewModel.getListIdeas().observe(viewLifecycleOwner, { listIdeas ->
-            if (listIdeas != null) {
-                Log.d("listIdeas: ", listIdeas.toString())
-                val funderProgressAdapter = FunderProgressAdapter(this@FunderProgressFragment)
-                funderProgressAdapter.setListIdeas(listIdeas)
-                with(binding.listProgressFunder) {
-                    layoutManager = LinearLayoutManager(requireContext())
-                    adapter = funderProgressAdapter
-                }
-                showLoading(false)
-            }
-        })
     }
 
     override fun onDestroyView() {

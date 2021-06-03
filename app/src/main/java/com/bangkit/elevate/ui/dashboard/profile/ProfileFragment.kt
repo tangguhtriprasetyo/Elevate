@@ -16,7 +16,11 @@ import com.bangkit.elevate.ui.dashboard.MainViewModel
 import com.bangkit.elevate.ui.dashboard.profile.saldo.TopUpFragment
 import com.bangkit.elevate.ui.dashboard.profile.saldo.WithdrawnFragment
 import com.bangkit.elevate.utils.loadImage
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import java.text.NumberFormat
 import java.util.*
 
@@ -131,6 +135,19 @@ class ProfileFragment : Fragment() {
                 }
             }
             isEditProfile = !isEditProfile
+        }
+
+        binding.btnLogout.setOnClickListener {
+            val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
+            val googleSignInClient: GoogleSignInClient
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+
+            googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+            firebaseAuth.signOut()
+            googleSignInClient.signOut()
         }
     }
 

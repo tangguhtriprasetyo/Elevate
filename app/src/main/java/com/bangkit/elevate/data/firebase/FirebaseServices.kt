@@ -5,7 +5,6 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.bangkit.elevate.data.FundedIdeasEntity
 import com.bangkit.elevate.data.IdeaEntity
 import com.bangkit.elevate.data.UserEntity
 import com.google.firebase.auth.FirebaseAuth
@@ -175,7 +174,12 @@ class FirebaseServices {
                     if (document?.exists() == true) {
                         val currentDonation: Long = document.get("currentFund") as Long
                         Log.d("currentDonation: ", currentDonation.toString())
-                        docRef.update("currentFund", currentDonation + totalDonate)
+                        docRef.update(
+                            "currentFund",
+                            currentDonation + totalDonate,
+                            "fundedUser",
+                            FieldValue.arrayUnion(uid)
+                        )
                             .addOnCompleteListener {
                                 if (it.isSuccessful) {
                                     val docUserRef = userRef.document(uid)
@@ -280,29 +284,6 @@ class FirebaseServices {
         return ideaData
     }
 
-    fun getFundedIdeasData(listFunded: List<FundedIdeasEntity>): MutableLiveData<List<IdeaEntity>> {
-        var fundedIdeasData = MutableLiveData<List<IdeaEntity>>()
-        var list = ArrayList<IdeaEntity>()
-        CoroutineScope(IO).launch {
-            listFunded.listIterator().forEach {
-                it.documentIdea?.get()?.addOnSuccessListener { document ->
-                    if (document != null) {
-                        list.add(document.toObject<IdeaEntity>()!!)
-                        Log.d("fundedIdeasDataSer: ", list.toString())
-                    } else {
-                        Log.d("Error getting Doc", "Document Doesn't Exist")
-                    }
-                }
-                    ?.addOnFailureListener {
-                        Log.d("Error getting Doc", it.message.toString())
-                    }
-            }
-            fundedIdeasData.postValue(list)
-            Log.d("liveDataSerFunded: ", fundedIdeasData.toString())
-        }
-        return fundedIdeasData
-    }
-
     fun getListIdeas(): Flow<List<IdeaEntity>?> {
         return callbackFlow {
             val listenerRegistration = firestoreRef.collection("Ideas")
@@ -329,10 +310,10 @@ class FirebaseServices {
         }
     }
 
-    fun getListFundedIdeas(uid: String): Flow<List<FundedIdeasEntity>?> {
+    fun getListFundedIdeas(uid: String): Flow<List<IdeaEntity>?> {
         return callbackFlow {
             val listenerRegistration =
-                firestoreRef.collection("User").document(uid).collection("FundedIdeas")
+                firestoreRef.collection("Ideas").whereArrayContains("fundedUser", uid)
                     .addSnapshotListener { querySnapshot: QuerySnapshot?, firestoreException: FirebaseFirestoreException? ->
                         if (firestoreException != null) {
                             cancel(
@@ -342,7 +323,7 @@ class FirebaseServices {
                             return@addSnapshotListener
                         }
                         val listFundedIdeas = querySnapshot?.documents?.mapNotNull {
-                            it.toObject<FundedIdeasEntity>()
+                            it.toObject<IdeaEntity>()
                         }
                         offer(listFundedIdeas)
                         Log.d("FUNDEDIDEAS", listFundedIdeas.toString())

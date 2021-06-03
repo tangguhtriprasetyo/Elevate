@@ -3,7 +3,6 @@ package com.bangkit.elevate.ui.dashboard.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.bangkit.elevate.data.FundedIdeasEntity
 import com.bangkit.elevate.data.IdeaEntity
 import com.bangkit.elevate.data.firebase.FirebaseServices
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -14,9 +13,5 @@ class HomeViewModel : ViewModel() {
 
     fun getListIdeas(): LiveData<List<IdeaEntity>?> {
         return firebaseServices.getListIdeas().asLiveData()
-    }
-
-    fun getListFundedIdeas(uid: String): LiveData<List<FundedIdeasEntity>?> {
-        return firebaseServices.getListFundedIdeas(uid).asLiveData()
     }
 }

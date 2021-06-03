@@ -82,6 +82,7 @@ class FirebaseServices {
                                 0,
                                 email,
                                 phone,
+                                0,
                                 uid,
                                 name
                             )
@@ -178,7 +179,13 @@ class FirebaseServices {
                             .addOnCompleteListener {
                                 if (it.isSuccessful) {
                                     val docUserRef = userRef.document(uid)
-                                    docUserRef.update("balance", userBalance - totalDonate)
+                                    val newUserBalance = userBalance - totalDonate
+                                    docUserRef.update(
+                                        "balance",
+                                        newUserBalance,
+                                        "totalFunded",
+                                        FieldValue.increment(1)
+                                    )
                                         .addOnCompleteListener { newBalance ->
                                             if (newBalance.isSuccessful) {
                                                 isSuccessful.postValue(true)
@@ -271,6 +278,29 @@ class FirebaseServices {
                 }
         }
         return ideaData
+    }
+
+    fun getFundedIdeasData(listFunded: List<FundedIdeasEntity>): MutableLiveData<List<IdeaEntity>> {
+        var fundedIdeasData = MutableLiveData<List<IdeaEntity>>()
+        var list = ArrayList<IdeaEntity>()
+        CoroutineScope(IO).launch {
+            listFunded.listIterator().forEach {
+                it.documentIdea?.get()?.addOnSuccessListener { document ->
+                    if (document != null) {
+                        list.add(document.toObject<IdeaEntity>()!!)
+                        Log.d("fundedIdeasDataSer: ", list.toString())
+                    } else {
+                        Log.d("Error getting Doc", "Document Doesn't Exist")
+                    }
+                }
+                    ?.addOnFailureListener {
+                        Log.d("Error getting Doc", it.message.toString())
+                    }
+            }
+            fundedIdeasData.postValue(list)
+            Log.d("liveDataSerFunded: ", fundedIdeasData.toString())
+        }
+        return fundedIdeasData
     }
 
     fun getListIdeas(): Flow<List<IdeaEntity>?> {

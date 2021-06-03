@@ -12,6 +12,7 @@ data class UserEntity(
     var balance: Long = 0,
     var email: String? = null,
     var phone: String? = null,
+    var totalFunded: Long = 0,
     var uid: String? = null,
     var username: String? = null,
     @get:Exclude

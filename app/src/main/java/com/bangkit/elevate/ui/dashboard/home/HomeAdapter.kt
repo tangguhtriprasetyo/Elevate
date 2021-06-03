@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bangkit.elevate.data.IdeaEntity
 import com.bangkit.elevate.databinding.ItemListIdeaBinding
 import com.bangkit.elevate.utils.loadImage
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class HomeAdapter(private val homeClickCallback: HomeClickCallback) :
     RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
@@ -41,11 +44,14 @@ class HomeAdapter(private val homeClickCallback: HomeClickCallback) :
                 itemView.setOnClickListener {
                     homeClickCallback.onItemClicked(ideas)
                 }
+
+                val localeId = Locale("in", "ID")
+                val priceFormat = NumberFormat.getCurrencyInstance(localeId)
                 cardBrandName.text = ideas.brandName
                 cardBrandType.text = ideas.businessIdea
                 cardLocation.text = ideas.location
                 cardIdeaStatus.text = ideas.status
-                cardTotalFund.text = ideas.requiredCost.toString()
+                cardTotalFund.text = priceFormat.format(ideas.requiredCost)
                 cardProgressBar.progress = 0
                 imgBrand.loadImage(ideas.logoFile)
 

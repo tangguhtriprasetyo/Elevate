@@ -1,6 +1,5 @@
 package com.bangkit.elevate.ui.dashboard.funder
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +7,9 @@ import com.bangkit.elevate.data.IdeaEntity
 import com.bangkit.elevate.databinding.ItemListIdeaBinding
 import com.bangkit.elevate.ui.dashboard.home.HomeClickCallback
 import com.bangkit.elevate.utils.loadImage
+import java.text.NumberFormat
+import java.util.*
+import kotlin.collections.ArrayList
 import kotlin.math.roundToInt
 
 class FunderProgressAdapter(private val homeClickCallback: HomeClickCallback) :
@@ -48,16 +50,17 @@ class FunderProgressAdapter(private val homeClickCallback: HomeClickCallback) :
                 itemView.setOnClickListener {
                     homeClickCallback.onItemClicked(ideas)
                 }
+                val localeId = Locale("in", "ID")
+                val priceFormat = NumberFormat.getCurrencyInstance(localeId)
                 cardBrandName.text = ideas.brandName
                 cardBrandType.text = ideas.businessIdea
                 cardLocation.text = ideas.location
                 cardIdeaStatus.text = ideas.status
-                cardTotalFund.text = ideas.requiredCost.toString()
+                cardTotalFund.text = priceFormat.format(ideas.requiredCost)
                 cardProgressBar.progress = currentProgress
                 imgBrand.loadImage(ideas.logoFile)
 
             }
-            Log.d("DataEachIdea", ideas.toString())
         }
     }
 }

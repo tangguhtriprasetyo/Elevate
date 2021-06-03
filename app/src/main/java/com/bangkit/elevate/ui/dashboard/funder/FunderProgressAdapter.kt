@@ -54,7 +54,7 @@ class FunderProgressAdapter(private val homeClickCallback: HomeClickCallback) :
                 cardIdeaStatus.text = ideas.status
                 cardTotalFund.text = ideas.requiredCost.toString()
                 cardProgressBar.progress = currentProgress
-                cardImage.loadImage(ideas.logoFile)
+                imgBrand.loadImage(ideas.logoFile)
 
             }
             Log.d("DataEachIdea", ideas.toString())

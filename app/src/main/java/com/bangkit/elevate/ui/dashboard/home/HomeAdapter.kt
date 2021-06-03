@@ -1,6 +1,5 @@
 package com.bangkit.elevate.ui.dashboard.home
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -48,10 +47,9 @@ class HomeAdapter(private val homeClickCallback: HomeClickCallback) :
                 cardIdeaStatus.text = ideas.status
                 cardTotalFund.text = ideas.requiredCost.toString()
                 cardProgressBar.progress = 0
-                cardImage.loadImage(ideas.logoFile)
+                imgBrand.loadImage(ideas.logoFile)
 
             }
-            Log.d("DataEachIdea", ideas.toString())
         }
     }
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="16dp"
+    android:layout_marginBottom="@dimen/activity_vertical_margin"
     android:elevation="8dp"
     app:cardCornerRadius="10dp">
 
@@ -15,52 +15,55 @@
         <ProgressBar
             android:id="@+id/cardProgressBar"
             style="@style/ProgressBarStyle"
-            android:layout_width="189dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="145dp"
-            android:layout_marginEnd="111dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:paddingStart="120dp"
+            android:paddingEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/cardIdeaStatus"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/cardTotalFund"
+            app:layout_constraintTop_toBottomOf="@+id/cardIdeaStatus" />
 
         <ImageView
             android:id="@+id/cardIconLocation"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginStart="11dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginBottom="10dp"
             android:src="@drawable/ic_baseline_location_on_24"
             app:layout_constraintBottom_toTopOf="@+id/cardIdeaStatus"
-            app:layout_constraintEnd_toStartOf="@+id/cardLocation"
-            app:layout_constraintStart_toEndOf="@+id/cardImage"
+            app:layout_constraintStart_toStartOf="@+id/cardBrandType"
             app:layout_constraintTop_toBottomOf="@+id/cardBrandType"
             tools:ignore="ContentDescription" />
 
-        <ImageView
+        <androidx.cardview.widget.CardView
             android:id="@+id/cardImage"
             android:layout_width="89dp"
-            android:layout_height="75dp"
+            android:layout_height="89dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="17dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:src="@drawable/ic_sample_photo"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
-            app:layout_constraintEnd_toStartOf="@+id/cardIconLocation"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="10dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/img_brand"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/brand_name"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_sample_photo" />
+
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:id="@+id/cardBrandName"
             style="@style/TitleDetailBrand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="9dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:text="@string/brand_name"
             app:layout_constraintBottom_toTopOf="@+id/cardBrandType"
             app:layout_constraintStart_toEndOf="@+id/cardImage"
@@ -71,7 +74,6 @@
             style="@style/SubtitleDetailBrand"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="3dp"
             android:text="@string/brand_type"
             app:layout_constraintBottom_toTopOf="@+id/cardLocation"
             app:layout_constraintStart_toStartOf="@+id/cardBrandName"
@@ -82,14 +84,11 @@
             style="@style/StatusIdeStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="51dp"
             android:background="@color/OnSecondary"
             android:padding="4dp"
             android:text="@string/status"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/cardImage"
+            app:layout_constraintStart_toStartOf="@+id/cardIconLocation"
             app:layout_constraintTop_toBottomOf="@+id/cardLocation"
             tools:ignore="SmallSp" />
 
@@ -129,9 +128,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="2dp"
             android:text="@string/location"
-            app:layout_constraintBottom_toTopOf="@+id/cardIdeaStatus"
             app:layout_constraintStart_toEndOf="@+id/cardIconLocation"
             app:layout_constraintTop_toBottomOf="@+id/cardBrandType"
             tools:ignore="SmallSp" />

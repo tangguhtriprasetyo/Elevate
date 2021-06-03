@@ -22,13 +22,12 @@ import com.bangkit.elevate.ui.dashboard.profile.ProfileFragment
 import com.bangkit.elevate.ui.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
 class MainActivity : AppCompatActivity(), FirebaseAuth.AuthStateListener {
 
     companion object {
         const val CHILD_FRAGMENT = "child_fragment"
+        const val EXTRA_USER = "extra_user"
     }
 
     private lateinit var binding: ActivityMainBinding
@@ -45,50 +44,49 @@ class MainActivity : AppCompatActivity(), FirebaseAuth.AuthStateListener {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.progressBarMain.visibility = View.VISIBLE
-
         mainViewModel = ViewModelProvider(
             this,
             ViewModelProvider.NewInstanceFactory()
         ).get(MainViewModel::class.java)
 
         mUserPreference = UserPreference(this)
+        user = intent.getParcelableExtra<UserEntity>(EXTRA_USER) as UserEntity
 
-        mainViewModel.setUserProfile(firebaseAuth.uid!!).observe(this, { userProfile ->
+        mainViewModel.setUserProfile(user.uid.toString()).observe(this, { userProfile ->
             if (userProfile != null) {
                 user = userProfile
-                val homeFragment = HomeFragment()
-                val funderProgressFragment = FunderProgressFragment()
-                val ideatorProgressFragment = IdeatorProgressFragment()
-                val profileFragment = ProfileFragment()
-
-                val mBundle = Bundle()
-                mBundle.putParcelable("UserData", user)
-                homeFragment.arguments = mBundle
-                funderProgressFragment.arguments = mBundle
-                ideatorProgressFragment.arguments = mBundle
-                profileFragment.arguments = mBundle
-
-                setCurrentFragment(homeFragment)
-                binding.progressBarMain.visibility = View.GONE
-
-                binding.bottomNav.setOnNavigationItemSelectedListener {
-                    when (it.itemId) {
-                        R.id.navigation_home -> setCurrentFragment(homeFragment)
-                        R.id.navigation_progress -> {
-                            isIdeator = mUserPreference.getRole()
-                            if (isIdeator) {
-                                setCurrentFragment(ideatorProgressFragment)
-                            } else {
-                                setCurrentFragment(funderProgressFragment)
-                            }
-                        }
-                        R.id.navigation_profile -> setCurrentFragment(profileFragment)
-                    }
-                    true
-                }
             }
         })
+
+        val homeFragment = HomeFragment()
+        val funderProgressFragment = FunderProgressFragment()
+        val ideatorProgressFragment = IdeatorProgressFragment()
+        val profileFragment = ProfileFragment()
+
+        val mBundle = Bundle()
+        mBundle.putParcelable("UserData", user)
+        homeFragment.arguments = mBundle
+        funderProgressFragment.arguments = mBundle
+        ideatorProgressFragment.arguments = mBundle
+        profileFragment.arguments = mBundle
+
+        setCurrentFragment(homeFragment)
+
+        binding.bottomNav.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.navigation_home -> setCurrentFragment(homeFragment)
+                R.id.navigation_progress -> {
+                    isIdeator = mUserPreference.getRole()
+                    if (isIdeator) {
+                        setCurrentFragment(ideatorProgressFragment)
+                    } else {
+                        setCurrentFragment(funderProgressFragment)
+                    }
+                }
+                R.id.navigation_profile -> setCurrentFragment(profileFragment)
+            }
+            true
+        }
     }
 
 

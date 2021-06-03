@@ -19,17 +19,17 @@ class OnBoardingScreenActivity : AppCompatActivity() {
             OnBoardingEntity(
                 R.drawable.ic_onboarding1,
                 "Ideator",
-                "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint."
+                "Start creating your own business idea and attract potential funder to be able to fund your business!"
             ),
             OnBoardingEntity(
                 R.drawable.ic_onboarding2,
                 "Funder",
-                "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint."
+                "Start funding people business ideas to help them open their potential business!"
             ),
             OnBoardingEntity(
                 R.drawable.ic_onboarding3,
                 "Crowdfunding",
-                "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint."
+                "What are you waiting for? Let's get started!"
             )
         )
     )

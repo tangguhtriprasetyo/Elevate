@@ -108,7 +108,6 @@ class AddIdeaFragment : Fragment() {
     }
 
     private fun uploadFiles() {
-        //TODO Check Error
         with(binding){
             if(etBrandName.text.toString().isEmpty()){
                 etBrandName.error = "Please enter a valid Brand Name"

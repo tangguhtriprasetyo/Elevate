@@ -8,7 +8,6 @@
     <string name="title_funder">FUNDER</string>
     <string name="title_crowdfunding">CROWDFUNDING</string>
     <string name="welcome">Welcome to Evelate!</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="modal">Modal</string>
     <string name="quantity">Rp.50.000.000</string>
@@ -60,4 +59,6 @@
     <string name="process_term1">On Process Term 1</string>
     <string name="process_term2">On Process Term 2</string>
     <string name="completed">Completed</string>
+    <string name="login_quote">An application to start and fund business. Start funding business today or start your own business today</string>
+    <string name="continue_with_google">Continue With Google</string>
 </resources>

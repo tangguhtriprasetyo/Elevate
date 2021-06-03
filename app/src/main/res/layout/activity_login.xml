@@ -18,7 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/login_title"
@@ -41,7 +42,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/kanit_semibold"
-        android:text="@string/placeholder_caption"
+        android:text="@string/login_quote"
         android:textAlignment="center"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -55,7 +56,7 @@
         android:layout_width="match_parent"
         android:layout_height="64dp"
         android:layout_marginTop="64dp"
-        android:text="Continue With Google"
+        android:text="@string/continue_with_google"
         android:textAllCaps="false"
         android:textColor="@color/black"
         app:backgroundTint="@color/common_google_signin_btn_text_dark"

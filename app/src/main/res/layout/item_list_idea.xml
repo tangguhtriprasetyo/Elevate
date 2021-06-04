@@ -65,6 +65,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/brand_name"
+            android:textSize="20sp"
             app:layout_constraintBottom_toTopOf="@+id/cardBrandType"
             app:layout_constraintStart_toEndOf="@+id/cardImage"
             app:layout_constraintTop_toTopOf="parent" />
@@ -75,6 +76,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/brand_type"
+            android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@+id/cardLocation"
             app:layout_constraintStart_toStartOf="@+id/cardBrandName"
             app:layout_constraintTop_toBottomOf="@+id/cardBrandName" />
@@ -129,6 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="@string/location"
+            android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@+id/cardIconLocation"
             app:layout_constraintTop_toBottomOf="@+id/cardBrandType"
             tools:ignore="SmallSp" />

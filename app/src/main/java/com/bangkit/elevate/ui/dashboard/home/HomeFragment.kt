@@ -1,10 +1,13 @@
 package com.bangkit.elevate.ui.dashboard.home
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -76,8 +79,31 @@ class HomeFragment : Fragment(), HomeClickCallback {
 
         binding.icFilterData.setOnClickListener {
             // TODO MACHINE LEARNING
+            dialog()
         }
 
+    }
+
+    private fun dialog() {
+        val options = arrayOf("Parcels", "Groceries","Foods","Snacks","Drinks")
+        var selectedItem = 0
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Select your genre")
+        builder.setSingleChoiceItems(options
+            , 0
+        ) { _: DialogInterface, item: Int ->
+            selectedItem = item
+        }
+        builder.setPositiveButton("Filter") { dialogInterface: DialogInterface, p1: Int ->
+            //TODO Machine Learning Filter
+
+            dialogInterface.dismiss()
+        }
+        builder.setNegativeButton("cancel") { dialogInterface: DialogInterface, p1: Int ->
+            dialogInterface.dismiss()
+        }
+        builder.create()
+        builder.show();
     }
 
     private fun showLoading(state: Boolean) {

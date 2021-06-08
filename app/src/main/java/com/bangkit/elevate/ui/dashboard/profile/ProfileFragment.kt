@@ -1,10 +1,13 @@
 package com.bangkit.elevate.ui.dashboard.profile
 
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bangkit.elevate.R
@@ -30,11 +33,13 @@ class ProfileFragment : Fragment() {
     private lateinit var _binding: FragmentProfileBinding
     private lateinit var mUserPreference: UserPreference
     private lateinit var userDataProfile: UserEntity
+    private lateinit var uriImagePath: Uri
 
     private val mainViewModel: MainViewModel by activityViewModels()
 
     private var isIdeator = false
     private var isEditProfile = false
+    private var isChangeAvatar = false
 
     private val binding get() = _binding
 
@@ -56,6 +61,15 @@ class ProfileFragment : Fragment() {
             userDataProfile = requireArguments().getParcelable("UserData")!!
         }
 
+        val getImage =
+            registerForActivityResult(ActivityResultContracts.OpenDocument()) { uriImage ->
+                if (uriImage.path != null) {
+                    uriImagePath = uriImage
+                    binding.ProfilePicture.setImageURI(uriImagePath)
+                    isChangeAvatar = true
+                }
+            }
+
         val topUpFrag = TopUpFragment()
         val withdrawnFrag = WithdrawnFragment()
 
@@ -65,7 +79,7 @@ class ProfileFragment : Fragment() {
 
 
         mainViewModel.setUserProfile(userDataProfile.uid.toString())
-            .observe(viewLifecycleOwner, androidx.lifecycle.Observer { userProfile ->
+            .observe(viewLifecycleOwner, { userProfile ->
                 if (userProfile != null) {
                     userDataProfile = userProfile
                     setProfileData(userDataProfile)
@@ -114,16 +128,47 @@ class ProfileFragment : Fragment() {
                     etAddress.isEnabled = false
                     etEmail.isEnabled = false
                     etPhone.isEnabled = false
-                    EditProfile.text = "Edit Profile"
+                    icChangePicture.visibility = View.GONE
+                    EditProfile.text = getString(R.string.title_edit_profile)
 
                     userDataProfile.username = etName.text.toString()
                     userDataProfile.address = etAddress.text.toString()
                     userDataProfile.email = etEmail.text.toString()
                     userDataProfile.phone = etPhone.text.toString()
 
-                    mainViewModel.editProfileUser(userDataProfile)
-
-                    Log.d("EditProfile: ", userDataProfile.toString())
+                    if (isChangeAvatar) {
+                        progressBarProfile.visibility = View.VISIBLE
+                        mainViewModel.uploadImages(
+                            uriImagePath,
+                            "${userDataProfile.uid.toString()}${userDataProfile.username}",
+                            "Images",
+                            "profilePicture"
+                        ).observe(viewLifecycleOwner, { downloadUrl ->
+                            if (downloadUrl != null) {
+                                userDataProfile.avatar = downloadUrl.toString()
+                                mainViewModel.editProfileUser(userDataProfile)
+                                progressBarProfile.visibility = View.GONE
+                                Toast.makeText(
+                                    requireActivity(),
+                                    "Profile Updated",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            } else {
+                                Toast.makeText(
+                                    requireActivity(),
+                                    "Update Profile Failed",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                progressBarProfile.visibility = View.GONE
+                            }
+                            Log.d("imgFilesUrl: ", downloadUrl.toString())
+                        })
+                    } else {
+                        mainViewModel.editProfileUser(userDataProfile)
+                        progressBarProfile.visibility = View.GONE
+                        Toast.makeText(requireActivity(), "Profile Updated", Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
             } else {
                 with(binding) {
@@ -131,10 +176,15 @@ class ProfileFragment : Fragment() {
                     etAddress.isEnabled = true
                     etEmail.isEnabled = true
                     etPhone.isEnabled = true
-                    EditProfile.text = "Save"
+                    icChangePicture.visibility = View.VISIBLE
+                    EditProfile.text = getString(R.string.title_save)
                 }
             }
             isEditProfile = !isEditProfile
+        }
+
+        binding.icChangePicture.setOnClickListener {
+            getImage.launch(arrayOf("image/*"))
         }
 
         binding.btnLogout.setOnClickListener {

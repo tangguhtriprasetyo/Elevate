@@ -37,8 +37,6 @@ class HomeAdapter(private val homeClickCallback: HomeClickCallback) :
     inner class HomeViewHolder(private val binding: ItemListIdeaBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(ideas: IdeaEntity) {
-//            val currentFunding = ideas.currentFund.toDouble()
-//            val requiredCost = ideas.requiredCost.toDouble()
             with(binding) {
 
                 itemView.setOnClickListener {

@@ -61,4 +61,6 @@
     <string name="completed">Completed</string>
     <string name="login_quote">An application to start and fund business. Start funding business today or start your own business today</string>
     <string name="continue_with_google">Continue With Google</string>
+    <string name="title_edit_profile">Edit Profile</string>
+    <string name="title_save">Save</string>
 </resources>

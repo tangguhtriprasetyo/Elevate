@@ -8,7 +8,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bangkit.elevate.R
 import com.bangkit.elevate.data.OnBoardingEntity
 import com.bangkit.elevate.databinding.ActivityOnBoardingScreenBinding
-import com.bangkit.elevate.ui.dashboard.MainActivity
 import com.bangkit.elevate.ui.login.LoginActivity
 
 class OnBoardingScreenActivity : AppCompatActivity() {

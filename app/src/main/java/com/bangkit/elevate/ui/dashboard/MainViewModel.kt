@@ -1,5 +1,6 @@
 package com.bangkit.elevate.ui.dashboard
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,4 +22,7 @@ class MainViewModel : ViewModel() {
 
     fun editProfileUser(authUser: UserEntity): LiveData<UserEntity> =
         firebaseServices.editUserProfile(authUser)
+
+    fun uploadImages(uri: Uri, uid: String, type: String, name: String): LiveData<String> =
+        firebaseServices.uploadFiles(uri, uid, type, name)
 }

@@ -28,6 +28,19 @@
                 android:layout_height="match_parent"
                 android:padding="@dimen/activity_horizontal_margin">
 
+                <ImageView
+                    android:id="@+id/ic_change_picture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/profile"
+                    android:paddingStart="32dp"
+                    android:paddingEnd="@dimen/activity_horizontal_margin"
+                    android:src="@drawable/ic_baseline_camera_alt_24"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/ProfilePicture"
+                    app:layout_constraintEnd_toEndOf="@+id/ProfilePicture"
+                    app:layout_constraintStart_toEndOf="@+id/ProfilePicture" />
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/ProfilePicture"
                     android:layout_width="99dp"
@@ -111,6 +124,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/activity_vertical_margin">
+
+                <ProgressBar
+                    android:id="@+id/progress_bar_profile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/textView12"
@@ -392,7 +415,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
-
 
         <Button
             android:id="@+id/btn_logout"

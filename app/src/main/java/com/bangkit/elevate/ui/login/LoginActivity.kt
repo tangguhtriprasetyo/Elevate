@@ -78,6 +78,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun createNewUser(userData: UserEntity) {
         Log.d("createdNewUser", userData.username.toString())
+        userData.balance = 100000
         loginViewModel.createdNewUser(userData).observe(this, { newUser ->
             if (newUser.isCreated == true) {
                 Toast.makeText(

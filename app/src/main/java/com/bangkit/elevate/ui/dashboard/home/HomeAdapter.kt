@@ -9,6 +9,7 @@ import com.bangkit.elevate.utils.loadImage
 import java.text.NumberFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.math.roundToInt
 
 class HomeAdapter(private val homeClickCallback: HomeClickCallback) :
     RecyclerView.Adapter<HomeAdapter.HomeViewHolder>() {
@@ -37,12 +38,14 @@ class HomeAdapter(private val homeClickCallback: HomeClickCallback) :
     inner class HomeViewHolder(private val binding: ItemListIdeaBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(ideas: IdeaEntity) {
+            val currentFunding = ideas.currentFund.toDouble()
+            val requiredCost = ideas.requiredCost.toDouble()
+            val currentProgress = (currentFunding / requiredCost * 100).roundToInt()
             with(binding) {
 
                 itemView.setOnClickListener {
                     homeClickCallback.onItemClicked(ideas)
                 }
-
                 val localeId = Locale("in", "ID")
                 val priceFormat = NumberFormat.getCurrencyInstance(localeId)
                 cardBrandName.text = ideas.brandName
@@ -50,7 +53,7 @@ class HomeAdapter(private val homeClickCallback: HomeClickCallback) :
                 cardLocation.text = ideas.location
                 cardIdeaStatus.text = ideas.status
                 cardTotalFund.text = priceFormat.format(ideas.requiredCost)
-                cardProgressBar.progress = 0
+                cardProgressBar.progress = currentProgress
                 imgBrand.loadImage(ideas.logoFile)
 
             }

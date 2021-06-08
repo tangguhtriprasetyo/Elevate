@@ -19,5 +19,4 @@ with funders (parties who are willing to fund business ideas).
 
 ## SCREENSHOT
 
-![Alt text](/result apps.png "Elevate! Apps")
-![Alt text](/tugasMod5_2.png?raw=true "Screenshot Tugas")
+![Alt text](/result apps.png?raw=true "Elevate! Apps")

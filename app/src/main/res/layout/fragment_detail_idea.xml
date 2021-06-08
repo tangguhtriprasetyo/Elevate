@@ -41,13 +41,15 @@
 
                 <Button
                     android:id="@+id/DonateButton"
-                    android:layout_width="132dp"
-                    android:layout_height="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="32dp"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/kanit"
+                    android:paddingStart="@dimen/parent_layout_padding"
+                    android:paddingEnd="@dimen/parent_layout_padding"
                     android:text="@string/donate"
                     android:textAllCaps="false"
                     android:textSize="14sp"
@@ -235,12 +237,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView8">
+
             <include
                 android:id="@+id/term1Locked"
                 layout="@layout/layout_progress_lock"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="visible"/>
+                android:visibility="gone" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/Term1Unlocked"
@@ -249,24 +252,23 @@
                 android:padding="16dp">
 
                 <ProgressBar
-                    android:visibility="gone"
                     android:id="@+id/Term1ProgressBar"
                     style="@style/ProgressBarStyle"
-                    android:layout_width="257dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toTopOf="@+id/Term1Progress"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/Term1FileType"
-                    app:layout_constraintTop_toBottomOf="@+id/Term1Description" />
+                    app:layout_constraintEnd_toEndOf="@+id/Term1Description"
+                    app:layout_constraintStart_toStartOf="@+id/term1"
+                    app:layout_constraintTop_toBottomOf="@+id/Term1FileType" />
 
                 <ImageView
-                    android:visibility="gone"
                     android:id="@+id/Term1Proposal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:src="@drawable/ic_mdi_file_download"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toTopOf="@+id/Term1FileType"
                     app:layout_constraintEnd_toEndOf="@+id/term1"
                     app:layout_constraintStart_toStartOf="@+id/term1"
@@ -284,34 +286,38 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:visibility="gone"
                     android:id="@+id/Term1FileType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:alpha=".2"
                     android:fontFamily="@font/kanit_bold"
+                    android:maxWidth="44dp"
                     android:text="@string/document"
+                    android:textAlignment="center"
                     android:textColor="@color/OnSecondary"
-                    android:textSize="10sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="8sp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/Term1Proposal"
                     app:layout_constraintStart_toStartOf="@+id/Term1Proposal"
                     app:layout_constraintTop_toBottomOf="@+id/Term1Proposal"
                     tools:ignore="SmallSp" />
 
                 <TextView
-                    android:visibility="gone"
                     android:id="@+id/Term1Description"
-                    android:layout_width="257dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:maxWidth="252dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginBottom="4dp"
                     android:alpha=".4"
                     android:fontFamily="@font/kanit"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
                     android:text="@string/term1_description"
                     android:textColor="@color/OnSecondary"
                     android:textSize="10sp"
+                    android:visibility="visible"
                     app:layout_constraintBottom_toTopOf="@+id/Term1ProgressBar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.058"
@@ -320,20 +326,19 @@
                     tools:ignore="SmallSp" />
 
                 <TextView
-                    android:visibility="gone"
                     android:id="@+id/Term1Progress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:alpha=".4"
                     android:text="@string/detailCurrentProgress"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
+                    android:visibility="visible"
                     app:layout_constraintStart_toStartOf="@+id/Term1ProgressBar"
                     app:layout_constraintTop_toBottomOf="@+id/Term1ProgressBar"
                     tools:ignore="SmallSp" />
 
                 <TextView
-                    android:visibility="gone"
                     android:id="@+id/Term1FinalProgress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -341,8 +346,12 @@
                     android:alpha=".4"
                     android:fontFamily="@font/kanit"
                     android:text="@string/document_in_review"
+                    android:maxWidth="200dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
                     android:textColor="@color/OnSecondary"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
+                    android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="@+id/Term1ProgressBar"
                     app:layout_constraintTop_toBottomOf="@+id/Term1ProgressBar" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -364,7 +373,8 @@
                 android:id="@+id/term2Locked"
                 layout="@layout/layout_progress_lock"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="visible" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -372,24 +382,23 @@
                 android:padding="16dp">
 
                 <ProgressBar
-                    android:visibility="gone"
                     android:id="@+id/Term2ProgressBar"
                     style="@style/ProgressBarStyle"
-                    android:layout_width="257dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/Term2Progress"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/Term2FileType"
-                    app:layout_constraintTop_toBottomOf="@+id/Term2Description" />
+                    app:layout_constraintEnd_toEndOf="@+id/Term2Description"
+                    app:layout_constraintStart_toStartOf="@+id/term2"
+                    app:layout_constraintTop_toBottomOf="@+id/Term2FileType" />
 
                 <ImageView
-                    android:visibility="gone"
                     android:id="@+id/Term2Proposal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:src="@drawable/ic_mdi_file_download"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/Term2FileType"
                     app:layout_constraintEnd_toEndOf="@+id/term2"
                     app:layout_constraintStart_toStartOf="@+id/term2"
@@ -408,15 +417,16 @@
 
                 <TextView
                     android:id="@+id/Term2FileType"
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:alpha=".2"
                     android:fontFamily="@font/kanit_bold"
+                    android:maxWidth="44dp"
                     android:text="@string/document"
+                    android:textAlignment="center"
                     android:textColor="@color/OnSecondary"
-                    android:textSize="10sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="8sp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/Term2Proposal"
                     app:layout_constraintStart_toStartOf="@+id/Term2Proposal"
                     app:layout_constraintTop_toBottomOf="@+id/Term2Proposal"
@@ -424,17 +434,20 @@
 
                 <TextView
                     android:id="@+id/Term2Description"
-                    android:visibility="gone"
-                    android:layout_width="257dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:maxWidth="252dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginBottom="4dp"
                     android:alpha=".4"
                     android:fontFamily="@font/kanit"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
                     android:text="@string/term1_description"
                     android:textColor="@color/OnSecondary"
                     android:textSize="10sp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/Term2ProgressBar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.058"
@@ -444,28 +457,31 @@
 
                 <TextView
                     android:id="@+id/Term2Progress"
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:alpha=".4"
                     android:text="@string/detailCurrentProgress"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="@+id/Term2ProgressBar"
                     app:layout_constraintTop_toBottomOf="@+id/Term2ProgressBar"
                     tools:ignore="SmallSp" />
 
                 <TextView
                     android:id="@+id/Term2FinalProgress"
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|end"
                     android:alpha=".4"
                     android:fontFamily="@font/kanit"
                     android:text="@string/document_in_review"
+                    android:maxWidth="200dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
                     android:textColor="@color/OnSecondary"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/Term2ProgressBar"
                     app:layout_constraintTop_toBottomOf="@+id/Term2ProgressBar" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -488,7 +504,8 @@
                 android:id="@+id/term3Locked"
                 layout="@layout/layout_progress_lock"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:visibility="visible" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -496,24 +513,23 @@
                 android:padding="16dp">
 
                 <ProgressBar
-                    android:visibility="gone"
                     android:id="@+id/Term3ProgressBar"
                     style="@style/ProgressBarStyle"
-                    android:layout_width="257dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/Term3Progress"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/Term3FileType"
-                    app:layout_constraintTop_toBottomOf="@+id/Term3Description" />
+                    app:layout_constraintEnd_toEndOf="@+id/Term3Description"
+                    app:layout_constraintStart_toStartOf="@+id/term3"
+                    app:layout_constraintTop_toBottomOf="@+id/Term3FileType" />
 
                 <ImageView
-                    android:visibility="gone"
                     android:id="@+id/Term3Proposal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:src="@drawable/ic_mdi_file_download"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/Term3FileType"
                     app:layout_constraintEnd_toEndOf="@+id/term3"
                     app:layout_constraintStart_toStartOf="@+id/term3"
@@ -532,15 +548,16 @@
 
                 <TextView
                     android:id="@+id/Term3FileType"
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:alpha=".2"
                     android:fontFamily="@font/kanit_bold"
+                    android:maxWidth="44dp"
                     android:text="@string/document"
+                    android:textAlignment="center"
                     android:textColor="@color/OnSecondary"
-                    android:textSize="10sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:textSize="8sp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/Term3Proposal"
                     app:layout_constraintStart_toStartOf="@+id/Term3Proposal"
                     app:layout_constraintTop_toBottomOf="@+id/Term3Proposal"
@@ -548,17 +565,20 @@
 
                 <TextView
                     android:id="@+id/Term3Description"
-                    android:visibility="gone"
-                    android:layout_width="257dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:maxWidth="252dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginTop="14dp"
                     android:layout_marginBottom="4dp"
                     android:alpha=".4"
                     android:fontFamily="@font/kanit"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
                     android:text="@string/term1_description"
                     android:textColor="@color/OnSecondary"
                     android:textSize="10sp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toTopOf="@+id/Term3ProgressBar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.058"
@@ -568,20 +588,19 @@
 
                 <TextView
                     android:id="@+id/Term3Progress"
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
                     android:alpha=".4"
                     android:text="@string/detailCurrentProgress"
-                    android:textSize="12sp"
+                    android:textSize="10sp"
+                    android:visibility="gone"
                     app:layout_constraintStart_toStartOf="@+id/Term3ProgressBar"
                     app:layout_constraintTop_toBottomOf="@+id/Term3ProgressBar"
                     tools:ignore="SmallSp" />
 
                 <TextView
                     android:id="@+id/Term3FinalProgress"
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|end"
@@ -589,7 +608,11 @@
                     android:fontFamily="@font/kanit"
                     android:text="@string/document_in_review"
                     android:textColor="@color/OnSecondary"
-                    android:textSize="12sp"
+                    android:maxWidth="200dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="8dp"
+                    android:textSize="10sp"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="@+id/Term3ProgressBar"
                     app:layout_constraintTop_toBottomOf="@+id/Term3ProgressBar" />
             </androidx.constraintlayout.widget.ConstraintLayout>

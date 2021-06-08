@@ -11,7 +11,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 class HomeViewModel : ViewModel() {
     private val firebaseServices: FirebaseServices = FirebaseServices()
 
-    fun getListIdeas(): LiveData<List<IdeaEntity>?> {
-        return firebaseServices.getListIdeas().asLiveData()
+    fun getListIdeas(filterQuery: String): LiveData<List<IdeaEntity>?> {
+        return firebaseServices.getListIdeas(filterQuery).asLiveData()
     }
 }

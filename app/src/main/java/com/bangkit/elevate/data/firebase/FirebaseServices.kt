@@ -284,10 +284,16 @@ class FirebaseServices {
         return ideaData
     }
 
-    fun getListIdeas(): Flow<List<IdeaEntity>?> {
+    fun getListIdeas(filterQuery: String): Flow<List<IdeaEntity>?> {
         return callbackFlow {
-            val listenerRegistration = firestoreRef.collection("Ideas")
-                .addSnapshotListener { querySnapshot: QuerySnapshot?, firestoreException: FirebaseFirestoreException? ->
+            val listenerValue = if (filterQuery == "No Filters") {
+                firestoreRef.collection("Ideas")
+            } else {
+                firestoreRef.collection("Ideas").whereEqualTo("category", filterQuery)
+            }
+
+            val listenerRegistration =
+                listenerValue.addSnapshotListener { querySnapshot: QuerySnapshot?, firestoreException: FirebaseFirestoreException? ->
                     if (firestoreException != null) {
                         cancel(
                             message = "Error fetching posts",

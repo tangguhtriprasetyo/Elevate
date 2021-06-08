@@ -7,6 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class IdeaEntity(
     var brandName: String? = null,
     var businessIdea: String? = null,
+    var category: String? = null,
     var currentFund: Long = 0,
     var description: String? = null,
     var ideatorUid: String? = null,

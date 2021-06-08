@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,11 +33,13 @@ class HomeFragment : Fragment(), HomeClickCallback {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    private var filterQuery: String = "No Filters"
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
@@ -55,24 +56,12 @@ class HomeFragment : Fragment(), HomeClickCallback {
         if (arguments != null) {
             userDataProfile = requireArguments().getParcelable("UserData")!!
         }
-
         mainViewModel.setUserProfile(userDataProfile.uid.toString())
             .observe(viewLifecycleOwner, { userProfile ->
                 if (userProfile != null) {
                     userDataProfile = userProfile
                     binding.icAvatarHome.loadImage(userDataProfile.avatar)
-                    homeViewModel.getListIdeas().observe(viewLifecycleOwner, { listIdeas ->
-                        if (listIdeas != null) {
-                            Log.d("listIdeas: ", listIdeas.toString())
-                            val homeAdapter = HomeAdapter(this@HomeFragment)
-                            homeAdapter.setListIdeas(listIdeas)
-                            with(binding.recyclerView) {
-                                layoutManager = LinearLayoutManager(requireContext())
-                                adapter = homeAdapter
-                            }
-                            showLoading(false)
-                        }
-                    })
+                    setListIdeas("No Filters")
                 }
                 Log.d("ViewModelProfile: ", userProfile.toString())
             })
@@ -84,26 +73,43 @@ class HomeFragment : Fragment(), HomeClickCallback {
 
     }
 
+    private fun setListIdeas(filterQuery: String) {
+        homeViewModel.getListIdeas(filterQuery).observe(viewLifecycleOwner, { listIdeas ->
+            if (listIdeas != null) {
+                Log.d("listIdeas: ", listIdeas.toString())
+                val homeAdapter = HomeAdapter(this@HomeFragment)
+                homeAdapter.setListIdeas(listIdeas)
+                with(binding.recyclerView) {
+                    layoutManager = LinearLayoutManager(requireContext())
+                    adapter = homeAdapter
+                }
+                showLoading(false)
+            }
+        })
+    }
+
     private fun dialog() {
-        val options = arrayOf("Parcels", "Groceries","Foods","Snacks","Drinks")
+        val options = arrayOf("No Filters", "Parcels", "Groceries", "Foods", "Snacks", "Drinks")
         var selectedItem = 0
         val builder = AlertDialog.Builder(context)
-        builder.setTitle("Select your genre")
-        builder.setSingleChoiceItems(options
-            , 0
+        builder.setTitle("Filter Ideas By Category")
+        builder.setSingleChoiceItems(
+            options, 0
         ) { _: DialogInterface, item: Int ->
             selectedItem = item
         }
-        builder.setPositiveButton("Filter") { dialogInterface: DialogInterface, p1: Int ->
+        builder.setPositiveButton("Filter") { dialogInterface: DialogInterface, _: Int ->
             //TODO Machine Learning Filter
-
+            filterQuery = options[selectedItem]
+            setListIdeas(filterQuery)
+            Log.d("SelectedITem", filterQuery)
             dialogInterface.dismiss()
         }
-        builder.setNegativeButton("cancel") { dialogInterface: DialogInterface, p1: Int ->
+        builder.setNegativeButton("cancel") { dialogInterface: DialogInterface, _: Int ->
             dialogInterface.dismiss()
         }
         builder.create()
-        builder.show();
+        builder.show()
     }
 
     private fun showLoading(state: Boolean) {

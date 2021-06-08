@@ -19,7 +19,7 @@ with funders (parties who are willing to fund business ideas).
 
 ## SCREENSHOT
 
-![Alt text](/tugasMod5_1.png?raw=true "Screenshot Tugas")
+![Alt text](/splash.jpeg?raw=true "Screenshot Tugas")
 ![Alt text](/tugasMod5_2.png?raw=true "Screenshot Tugas")
 ![Alt text](/tugasMod5_3.png?raw=true "Screenshot Tugas")
 ![Alt text](/tugasMod5_4.png?raw=true "Screenshot Tugas")

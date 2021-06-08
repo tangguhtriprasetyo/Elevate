@@ -19,4 +19,4 @@ with funders (parties who are willing to fund business ideas).
 
 ## SCREENSHOT
 
-![Alt text](/result apps.png?raw=true "Elevate! Apps")
+![Alt text](/result_apps.png?raw=true "Elevate! Apps")
